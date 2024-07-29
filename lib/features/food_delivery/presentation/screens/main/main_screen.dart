@@ -20,7 +20,9 @@ class MainScreen extends StatelessWidget {
         scrolledUnderElevation: 0,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          GoRouter.of(context).goNamed(RouteNames.cartScreen);
+        },
         child: const Icon(Icons.shopping_basket_outlined),
       ),
       body: SingleChildScrollView(

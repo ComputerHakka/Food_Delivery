@@ -1,5 +1,6 @@
 import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/bonuses/bonuses_screen.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/cart/cart_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/main/main_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/notifications/notifications_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +23,11 @@ class AppRoutes {
             path: 'bonuses',
             name: RouteNames.bonusesScreen,
             builder: (context, state) => const BonusesScreen(),
+          ),
+          GoRoute(
+            path: 'cart',
+            name: RouteNames.cartScreen,
+            builder: (context, state) => const CartScreen(),
           ),
         ],
       ),
