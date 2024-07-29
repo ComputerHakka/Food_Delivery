@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/config/routes/routes.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/main/main_screen.dart';
 
 void main() {
@@ -10,14 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      title: 'Food Delivery',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MainScreen(),
+      routerConfig: AppRoutes.router,
     );
   }
 }

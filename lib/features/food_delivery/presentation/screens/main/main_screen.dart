@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/core/constants/constants.dart';
+import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -95,14 +98,38 @@ class DrawerMenuWidget extends StatelessWidget {
     return Drawer(
       child: Column(
         children: [
+          const SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Ink(
               width: double.infinity,
-              height: 50,
+              height: 55,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.cyan,
+              ),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(10),
+                onTap: () {},
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: Row(
+                    children: [
+                      CircleAvatar(),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Привет'),
+                          Text('Войти'),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
@@ -113,38 +140,55 @@ class DrawerMenuWidget extends StatelessWidget {
           Expanded(
             child: ListView(
               physics: const NeverScrollableScrollPhysics(),
-              children: const [
+              children: [
                 ListTile(
-                  title: Text('Уведомления'),
-                  leading: Icon(Icons.notifications_none_rounded),
+                  title: const Text('Уведомления'),
+                  leading: const Icon(Icons.notifications_none_rounded),
+                  onTap: () {
+                    GoRouter.of(context)
+                        .goNamed(RouteNames.notifiactionsScreen);
+                  },
                 ),
                 ListTile(
-                  title: Text('Бонусы'),
-                  leading: Icon(Icons.wallet_giftcard_rounded),
+                  title: const Text('Бонусы'),
+                  leading: const Icon(Icons.wallet_giftcard_rounded),
+                  onTap: () {
+                    GoRouter.of(context).goNamed(RouteNames.bonusesScreen);
+                  },
                 ),
                 ListTile(
-                  title: Text('Акции'),
-                  leading: Icon(Icons.sell_outlined),
+                  title: const Text('Акции'),
+                  leading: const Icon(Icons.sell_outlined),
+                  onTap: () {},
                 ),
                 ListTile(
-                  title: Text('Каталог'),
-                  leading: Icon(Icons.my_library_books_outlined),
+                  title: const Text('Каталог'),
+                  leading: const Icon(Icons.my_library_books_outlined),
+                  onTap: () {},
                 ),
                 ListTile(
-                  title: Text('Условия доставки'),
-                  leading: Icon(Icons.pedal_bike_rounded),
+                  title: const Text('Условия доставки'),
+                  leading: const Icon(Icons.pedal_bike_rounded),
+                  onTap: () {},
                 ),
                 ListTile(
-                  title: Text('Настройки'),
-                  leading: Icon(Icons.settings),
+                  title: const Text('Настройки'),
+                  leading: const Icon(Icons.settings),
+                  onTap: () {},
                 ),
                 ListTile(
-                  title: Text('О компании'),
-                  leading: Icon(Icons.work_outline_rounded),
+                  title: const Text('О компании'),
+                  leading: const Icon(Icons.work_outline_rounded),
+                  onTap: () {},
                 ),
                 ListTile(
-                  title: Text('Поддержка'),
-                  leading: Icon(Icons.support_agent_rounded),
+                  title: const Text('Поддержка'),
+                  leading: const Icon(Icons.support_agent_rounded),
+                  onTap: () async {
+                    final Uri smsLaunchUri =
+                        Uri(scheme: 'tel', path: '89189810271');
+                    await launchUrl(smsLaunchUri);
+                  },
                 ),
               ],
             ),
