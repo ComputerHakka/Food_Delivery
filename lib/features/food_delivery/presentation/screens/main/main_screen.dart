@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_delivery_app/config/theme/app_themes.dart';
 import 'package:food_delivery_app/core/constants/constants.dart';
+import 'package:food_delivery_app/features/food_delivery/domain/entities/category.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -58,7 +61,7 @@ class MainScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('Меню'),
-                  GridView(
+                  GridView.builder(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -67,18 +70,12 @@ class MainScreen extends StatelessWidget {
                       crossAxisCount: 3,
                       childAspectRatio: 0.9,
                     ),
-                    children: const [
-                      MenuCategoryWidget(),
-                      MenuCategoryWidget(),
-                      MenuCategoryWidget(),
-                      MenuCategoryWidget(),
-                      MenuCategoryWidget(),
-                      MenuCategoryWidget(),
-                      MenuCategoryWidget(),
-                      MenuCategoryWidget(),
-                      MenuCategoryWidget(),
-                      MenuCategoryWidget(),
-                    ],
+                    itemCount: CategoryEntity.categoriesList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return MenuCategoryWidget(
+                        category: CategoryEntity.categoriesList[index],
+                      );
+                    },
                   ),
                 ],
               ),
@@ -176,7 +173,9 @@ class DrawerMenuWidget extends StatelessWidget {
                 ListTile(
                   title: const Text('Настройки'),
                   leading: const Icon(Icons.settings),
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).goNamed(RouteNames.settingsScreen);
+                  },
                 ),
                 ListTile(
                   title: const Text('О компании'),
@@ -199,19 +198,25 @@ class DrawerMenuWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Divider(),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('ПРИСОЕДИНЯЙТЕСЬ К НАМ'),
-                SizedBox(height: 15),
+                const Text('ПРИСОЕДИНЯЙТЕСЬ К НАМ'),
+                const SizedBox(height: 15),
                 Row(
                   children: [
-                    Icon(Icons.adb_rounded),
-                    SizedBox(width: 10),
-                    Icon(Icons.adb_rounded),
+                    SvgPicture.asset(
+                      'lib/core/assets/images/vk_logo.svg',
+                      width: 30,
+                    ),
+                    const SizedBox(width: 10),
+                    SvgPicture.asset(
+                      'lib/core/assets/images/telegram_logo.svg',
+                      width: 30,
+                    ),
                   ],
                 )
               ],
@@ -240,7 +245,9 @@ class AdBannerWidget extends StatelessWidget {
 }
 
 class MenuCategoryWidget extends StatelessWidget {
-  const MenuCategoryWidget({super.key});
+  const MenuCategoryWidget({super.key, required this.category});
+
+  final CategoryEntity category;
 
   @override
   Widget build(BuildContext context) {
@@ -248,20 +255,25 @@ class MenuCategoryWidget extends StatelessWidget {
       padding: const EdgeInsets.all(4.0),
       child: Ink(
         decoration: BoxDecoration(
-          color: Colors.red,
+          color: containersColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
           onTap: () {},
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.fastfood_rounded,
                 size: 70,
+                color: Colors.red,
               ),
-              Text('Сеты'),
+              Text(
+                category.name,
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
         ),

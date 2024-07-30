@@ -3,6 +3,7 @@ import 'package:food_delivery_app/features/food_delivery/presentation/screens/bo
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/cart/cart_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/main/main_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/notifications/notifications_screen.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/settings/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRoutes {
@@ -28,6 +29,11 @@ class AppRoutes {
             path: 'cart',
             name: RouteNames.cartScreen,
             builder: (context, state) => const CartScreen(),
+          ),
+          GoRoute(
+            path: 'settings',
+            name: RouteNames.settingsScreen,
+            builder: (context, state) => const SettingsScreen(),
           ),
         ],
       ),

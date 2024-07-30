@@ -13,4 +13,5 @@ class RouteNames {
   static const notifiactionsScreen = 'notifications_screen';
   static const bonusesScreen = 'bonuses_screen';
   static const cartScreen = 'cart_screen';
+  static const settingsScreen = 'settings_screen';
 }
