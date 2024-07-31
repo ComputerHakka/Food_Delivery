@@ -267,12 +267,15 @@ class MenuCategoryWidget extends StatelessWidget {
             children: [
               const Icon(
                 Icons.fastfood_rounded,
-                size: 70,
+                size: 65,
                 color: Colors.red,
               ),
-              Text(
-                category.name,
-                textAlign: TextAlign.center,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Text(
+                  category.name.toUpperCase(),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ],
           ),
