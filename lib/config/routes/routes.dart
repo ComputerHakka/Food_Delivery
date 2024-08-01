@@ -1,6 +1,8 @@
 import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/bonuses/bonuses_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/cart/cart_screen.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/catalog_screen.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/copmany_info/company_information_scrre.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/main/main_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/notifications/notifications_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/settings/settings_screen.dart';
@@ -31,9 +33,19 @@ class AppRoutes {
             builder: (context, state) => const CartScreen(),
           ),
           GoRoute(
+            path: 'company_info',
+            name: RouteNames.companyInfoScreen,
+            builder: (context, state) => const CompanyInformationScreen(),
+          ),
+          GoRoute(
             path: 'settings',
             name: RouteNames.settingsScreen,
             builder: (context, state) => const SettingsScreen(),
+          ),
+          GoRoute(
+            path: 'catalog',
+            name: RouteNames.catalogScreen,
+            builder: (context, state) => const CatalogScreen(),
           ),
         ],
       ),

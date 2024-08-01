@@ -163,7 +163,9 @@ class DrawerMenuWidget extends StatelessWidget {
                 ListTile(
                   title: const Text('Каталог'),
                   leading: const Icon(Icons.my_library_books_outlined),
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).goNamed(RouteNames.catalogScreen);
+                  },
                 ),
                 ListTile(
                   title: const Text('Условия доставки'),
@@ -180,7 +182,9 @@ class DrawerMenuWidget extends StatelessWidget {
                 ListTile(
                   title: const Text('О компании'),
                   leading: const Icon(Icons.work_outline_rounded),
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).goNamed(RouteNames.companyInfoScreen);
+                  },
                 ),
                 ListTile(
                   title: const Text('Поддержка'),

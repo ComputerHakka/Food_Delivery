@@ -5,11 +5,13 @@ class SaleEntity {
   final String title;
   final String? description;
   final List<MenuEntity> salePositions;
+  final String? imagePath;
 
   const SaleEntity({
     required this.id,
     required this.title,
     this.description,
     required this.salePositions,
+    this.imagePath,
   });
 }
