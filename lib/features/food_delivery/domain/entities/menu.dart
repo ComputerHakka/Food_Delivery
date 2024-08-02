@@ -234,7 +234,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [46, 47, 48],
         images: ['image20.png'],
-        labels: [15],
+        labels: [1, 4],
         menuPositions: [22]),
     MenuEntity(
         id: 17,
@@ -247,7 +247,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [49, 50, 51],
         images: ['image21.png'],
-        labels: [16],
+        labels: [2, 11],
         menuPositions: [23]),
     MenuEntity(
         id: 18,
@@ -260,7 +260,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [52, 53, 54],
         images: ['image22.png'],
-        labels: [17],
+        labels: [5],
         menuPositions: [24, 25]),
     MenuEntity(
         id: 19,
@@ -273,7 +273,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [55, 56, 57],
         images: ['image23.png'],
-        labels: [18],
+        labels: [9],
         menuPositions: [26]),
     MenuEntity(
         id: 20,
@@ -286,7 +286,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [58, 59, 60],
         images: ['image24.png'],
-        labels: [19],
+        labels: [2, 6],
         menuPositions: [27]),
     MenuEntity(
         id: 21,
@@ -299,7 +299,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [61, 62, 63],
         images: ['image25.png'],
-        labels: [20],
+        labels: [4, 8],
         menuPositions: [28]),
     MenuEntity(
         id: 22,
@@ -312,7 +312,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [64, 65, 66],
         images: ['image26.png'],
-        labels: [21],
+        labels: [4],
         menuPositions: [29]),
     MenuEntity(
         id: 23,
@@ -325,7 +325,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [67, 68, 69],
         images: ['image27.png'],
-        labels: [22],
+        labels: [13],
         menuPositions: [30]),
     MenuEntity(
         id: 24,
@@ -338,7 +338,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [70, 71, 72],
         images: ['image28.png'],
-        labels: [23],
+        labels: [5],
         menuPositions: [31]),
     MenuEntity(
         id: 25,
@@ -351,7 +351,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [73, 74, 75],
         images: ['image29.png'],
-        labels: [24],
+        labels: [1, 2],
         menuPositions: [32]),
   ];
 }
