@@ -1,23 +1,30 @@
+import 'package:flutter/material.dart';
+
 class MenuLabelEntity {
   final int id;
   final String name;
+  final Color? color;
 
-  const MenuLabelEntity({required this.id, required this.name});
+  const MenuLabelEntity({
+    required this.id,
+    required this.name,
+    required this.color,
+  });
 
-  static const List<MenuLabelEntity> labelsList = [
-    MenuLabelEntity(id: 1, name: 'NEW'),
-    MenuLabelEntity(id: 2, name: 'АКЦИЯ'),
-    MenuLabelEntity(id: 3, name: '5 чел.'),
-    MenuLabelEntity(id: 4, name: '4 чел.'),
-    MenuLabelEntity(id: 5, name: '2 чел.'),
-    MenuLabelEntity(id: 6, name: '6 чел.'),
-    MenuLabelEntity(id: 7, name: 'СРЕДНЕОСТРОЕ'),
-    MenuLabelEntity(id: 8, name: 'СИЛЬНООСТРОЕ'),
-    MenuLabelEntity(id: 9, name: 'МАЛООСТРОЕ'),
-    MenuLabelEntity(id: 10, name: 'МИНИ'),
-    MenuLabelEntity(id: 11, name: 'ИЗ ПЕЧИ'),
-    MenuLabelEntity(id: 12, name: 'ОПАЛЕННЫЕ'),
-    MenuLabelEntity(id: 13, name: 'VEG'),
-    MenuLabelEntity(id: 14, name: 'ФИТНЕСС'),
+  static List<MenuLabelEntity> labelsList = [
+    MenuLabelEntity(id: 1, name: 'NEW', color: Colors.pink[900]),
+    const MenuLabelEntity(id: 2, name: 'АКЦИЯ', color: Colors.red),
+    const MenuLabelEntity(id: 3, name: '5 ЧЕЛ.', color: Colors.green),
+    const MenuLabelEntity(id: 4, name: '4 ЧЕЛ.', color: Colors.green),
+    const MenuLabelEntity(id: 5, name: '2 ЧЕЛ.', color: Colors.green),
+    const MenuLabelEntity(id: 6, name: '6 ЧЕЛ.', color: Colors.green),
+    MenuLabelEntity(id: 7, name: 'СРЕДНЕОСТРОЕ', color: Colors.red[600]),
+    MenuLabelEntity(id: 8, name: 'СИЛЬНООСТРОЕ', color: Colors.red[900]),
+    MenuLabelEntity(id: 9, name: 'НЕМНОГО ОСТРОЕ', color: Colors.red[300]),
+    const MenuLabelEntity(id: 10, name: 'МИНИ', color: Colors.yellow),
+    MenuLabelEntity(id: 11, name: 'ИЗ ПЕЧИ', color: Colors.brown[600]),
+    MenuLabelEntity(id: 12, name: 'ОПАЛЕННЫЕ', color: Colors.orange[300]),
+    MenuLabelEntity(id: 13, name: 'VEG', color: Colors.green[600]),
+    MenuLabelEntity(id: 14, name: 'ФИТНЕСС', color: Colors.redAccent[100]),
   ];
 }

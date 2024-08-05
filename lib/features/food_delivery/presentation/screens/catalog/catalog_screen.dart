@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/features/food_delivery/domain/entities/ingredient.dart';
+import 'package:food_delivery_app/features/food_delivery/domain/entities/label.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 
 class CatalogScreen extends StatelessWidget {
@@ -13,7 +15,7 @@ class CatalogScreen extends StatelessWidget {
         itemCount: MenuEntity.menuList.length,
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
-          return const MenuCell();
+          return MenuCell(product: MenuEntity.menuList[index]);
         },
       ),
     );
@@ -21,10 +23,19 @@ class CatalogScreen extends StatelessWidget {
 }
 
 class MenuCell extends StatelessWidget {
-  const MenuCell({super.key});
+  const MenuCell({super.key, required this.product});
+
+  final MenuEntity product;
 
   @override
   Widget build(BuildContext context) {
+    List<String> labels = [];
+    if (product.labels != null) {
+      for (int label in product.labels!) {
+        labels.add(MenuLabelEntity.labelsList[label - 1].name);
+      }
+    }
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       width: double.infinity,
@@ -71,8 +82,8 @@ class MenuCell extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('220 г. • 8 шт.'),
-                const Text('ЛОСОСЬ ГРИЛЬ СЯКЕ ЗАПЕЧЕННЫЙ'),
+                Text('${product.weight}г. • 8 шт.'),
+                Text(product.name.toUpperCase()),
                 const Text(
                   'замес краб-микс, лосось, огурец, соус унаги, рис, нори',
                   maxLines: 3,
@@ -81,7 +92,7 @@ class MenuCell extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('409 ₽'),
+                    Text('${product.cost} ₽'),
                     ElevatedButton(
                       onPressed: () {},
                       child: const Text('В КОРЗИНУ'),
