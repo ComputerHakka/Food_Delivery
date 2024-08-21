@@ -109,7 +109,9 @@ class DrawerMenuWidget extends StatelessWidget {
               ),
               child: InkWell(
                 borderRadius: BorderRadius.circular(10),
-                onTap: () {},
+                onTap: () {
+                  GoRouter.of(context).goNamed(RouteNames.authorizationScreen);
+                },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: Row(

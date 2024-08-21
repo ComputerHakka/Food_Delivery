@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/features/food_delivery/domain/entities/ingredient.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/label.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 
@@ -30,6 +29,7 @@ class MenuCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> labels = [];
+
     if (product.labels != null) {
       for (int label in product.labels!) {
         labels.add(MenuLabelEntity.labelsList[label - 1].name);

@@ -1,4 +1,5 @@
 import 'package:food_delivery_app/core/constants/constants.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/auth/auth_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/bonuses/bonuses_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/cart/cart_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/catalog_screen.dart';
@@ -46,6 +47,11 @@ class AppRoutes {
             path: 'catalog',
             name: RouteNames.catalogScreen,
             builder: (context, state) => const CatalogScreen(),
+          ),
+          GoRoute(
+            path: 'auth',
+            name: RouteNames.authorizationScreen,
+            builder: (context, state) => const AuthScreen(),
           ),
         ],
       ),
