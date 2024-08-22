@@ -1,11 +1,15 @@
 import 'package:food_delivery_app/core/constants/constants.dart';
+import 'package:food_delivery_app/features/food_delivery/domain/entities/sale.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/auth/auth_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/bonuses/bonuses_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/cart/cart_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/catalog_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/copmany_info/company_information_scrre.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/filters/filters_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/main/main_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/notifications/notifications_screen.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sale_details_screen.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sales_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/settings/settings_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -29,6 +33,21 @@ class AppRoutes {
             builder: (context, state) => const BonusesScreen(),
           ),
           GoRoute(
+            path: 'sales',
+            name: RouteNames.salesScreen,
+            builder: (context, state) => const SalesScreen(),
+            routes: [
+              GoRoute(
+                path: 'sale_details',
+                name: RouteNames.saleDetailsScreen,
+                builder: (context, state) {
+                  SaleEntity sale = state.extra as SaleEntity;
+                  return SaleDetailsScreen(sale: sale);
+                },
+              ),
+            ],
+          ),
+          GoRoute(
             path: 'cart',
             name: RouteNames.cartScreen,
             builder: (context, state) => const CartScreen(),
@@ -47,6 +66,13 @@ class AppRoutes {
             path: 'catalog',
             name: RouteNames.catalogScreen,
             builder: (context, state) => const CatalogScreen(),
+            routes: [
+              GoRoute(
+                path: 'filter',
+                name: RouteNames.filterScreen,
+                builder: (context, state) => const FiltersScreen(),
+              ),
+            ],
           ),
           GoRoute(
             path: 'auth',

@@ -1,28 +1,128 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/core/constants/constants.dart';
+import 'package:food_delivery_app/features/food_delivery/domain/entities/category.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/label.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
+import 'package:go_router/go_router.dart';
 
-class CatalogScreen extends StatelessWidget {
+class CatalogScreen extends StatefulWidget {
   const CatalogScreen({super.key});
+
+  @override
+  State<CatalogScreen> createState() => _CatalogScreenState();
+}
+
+class _CatalogScreenState extends State<CatalogScreen> {
+  int _selectedIndex = 0; // Индекс выбранной категории
+  String _currentTitle = 'Народный';
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: MenuEntity.menuList.length,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-          return MenuCell(product: MenuEntity.menuList[index]);
-        },
+      body: Column(
+        children: [
+          SizedBox(
+            height: 136.0,
+            child: Column(
+              children: [
+                Container(
+                  height: 80.0,
+                  color: Colors.transparent,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: CategoryEntity.categoriesList.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Ink(
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(10),
+                              onTap: () {
+                                setState(() {
+                                  _selectedIndex = index;
+                                  _currentTitle =
+                                      CategoryEntity.categoriesList[index].name;
+                                });
+                                // Переход на соответствующую страницу
+                                _pageController.animateToPage(
+                                  index,
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.easeInOut,
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                child: Text(
+                                    CategoryEntity.categoriesList[index].name),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 56,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              GoRouter.of(context).pop();
+                            },
+                            icon: const Icon(Icons.arrow_back),
+                          ),
+                          Text(_currentTitle),
+                        ],
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            GoRouter.of(context)
+                                .goNamed(RouteNames.filterScreen);
+                          },
+                          icon: const Icon(Icons.filter_alt))
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                  _currentTitle = CategoryEntity.categoriesList[index].name;
+                });
+              },
+              itemCount: CategoryEntity.categoriesList.length,
+              itemBuilder: (context, index) {
+                return ListView.builder(
+                  padding: const EdgeInsets.all(16),
+                  itemCount: MenuEntity.menuList.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return _MenuCell(product: MenuEntity.menuList[index]);
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
-class MenuCell extends StatelessWidget {
-  const MenuCell({super.key, required this.product});
+class _MenuCell extends StatelessWidget {
+  const _MenuCell({super.key, required this.product});
 
   final MenuEntity product;
 

@@ -8,12 +8,13 @@ class RouteNames {
   static const historyScreen = 'history_screen';
   static const addressesScreen = 'addresses_screen';
   static const userServicesScreen = 'user_services_screen';
-  static const servicesListScreen = 'services_list_screen';
-  static const serviceDetailsScreen = 'service_details_screen';
+  static const salesScreen = 'sales_screen';
+  static const saleDetailsScreen = 'sale_details_screen';
   static const notifiactionsScreen = 'notifications_screen';
   static const bonusesScreen = 'bonuses_screen';
   static const cartScreen = 'cart_screen';
   static const settingsScreen = 'settings_screen';
   static const companyInfoScreen = 'company_info_screen';
   static const catalogScreen = 'catalog_screen';
+  static const filterScreen = 'filter_screen';
 }

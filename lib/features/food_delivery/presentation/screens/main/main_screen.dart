@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery_app/config/theme/app_themes.dart';
 import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/category.dart';
+import 'package:food_delivery_app/features/food_delivery/domain/entities/sale.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -33,16 +34,12 @@ class MainScreen extends StatelessWidget {
           children: [
             SizedBox(
               height: 150,
-              child: ListView(
+              child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                children: const [
-                  AdBannerWidget(),
-                  AdBannerWidget(),
-                  AdBannerWidget(),
-                  AdBannerWidget(),
-                  AdBannerWidget(),
-                  AdBannerWidget(),
-                ],
+                itemCount: SaleEntity.salesNow.length,
+                itemBuilder: (context, index) {
+                  return SaleBannerWidget(sale: SaleEntity.salesNow[index]);
+                },
               ),
             ),
             Container(
@@ -55,7 +52,7 @@ class MainScreen extends StatelessWidget {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +157,9 @@ class DrawerMenuWidget extends StatelessWidget {
                 ListTile(
                   title: const Text('Акции'),
                   leading: const Icon(Icons.sell_outlined),
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).goNamed(RouteNames.salesScreen);
+                  },
                 ),
                 ListTile(
                   title: const Text('Каталог'),
@@ -234,8 +233,10 @@ class DrawerMenuWidget extends StatelessWidget {
   }
 }
 
-class AdBannerWidget extends StatelessWidget {
-  const AdBannerWidget({super.key});
+class SaleBannerWidget extends StatelessWidget {
+  const SaleBannerWidget({super.key, required this.sale});
+
+  final SaleEntity sale;
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +245,10 @@ class AdBannerWidget extends StatelessWidget {
       width: 170,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.green,
+        image: DecorationImage(
+          image: AssetImage(sale.imagePath!),
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }
@@ -271,9 +275,9 @@ class MenuCategoryWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.fastfood_rounded,
-                size: 65,
+              Icon(
+                category.icon,
+                size: 67,
                 color: Colors.red,
               ),
               Padding(

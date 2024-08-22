@@ -8,3 +8,19 @@ const Color borderColor = Color(0xFFE2E8F0);
 const Color textFieldTextColor = Color(0xFF64748B);
 const Color lightButton = Color(0xFFD6E7F8);
 const Color splashButtonColor = Color.fromARGB(255, 133, 216, 255);
+
+final ThemeData appTheme = ThemeData(
+  appBarTheme: appBarTheme,
+  colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+  useMaterial3: true,
+);
+
+const AppBarTheme appBarTheme = AppBarTheme(
+  scrolledUnderElevation: 0,
+  color: Colors.transparent,
+  titleTextStyle: TextStyle(
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+    fontSize: 21,
+  ),
+);

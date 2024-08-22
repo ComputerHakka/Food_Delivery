@@ -38,7 +38,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [1, 2, 3],
-        images: ['image1.png', 'image2.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [1],
         menuPositions: [1, 2]),
     MenuEntity(
@@ -51,7 +51,7 @@ class MenuEntity {
         isSpicy: false,
         isVegan: false,
         ingredients: [4, 5, 6],
-        images: ['image3.png', 'image4.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [2],
         menuPositions: [3]),
     MenuEntity(
@@ -64,7 +64,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: true,
         ingredients: [7, 8, 9],
-        images: ['image5.png', 'image6.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [3],
         menuPositions: [4, 5]),
     MenuEntity(
@@ -77,7 +77,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [10, 11, 12],
-        images: ['image7.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [1],
         menuPositions: [6]),
     MenuEntity(
@@ -90,7 +90,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: true,
         ingredients: [13, 14, 15],
-        images: ['image8.png', 'image9.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [4],
         menuPositions: [7, 8]),
     MenuEntity(
@@ -103,7 +103,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [16, 17, 18],
-        images: ['image10.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [5],
         menuPositions: [9]),
     MenuEntity(
@@ -116,7 +116,7 @@ class MenuEntity {
         isSpicy: false,
         isVegan: true,
         ingredients: [19, 20, 21],
-        images: ['image11.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [6],
         menuPositions: [10]),
     MenuEntity(
@@ -129,7 +129,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [22, 23, 24],
-        images: ['image12.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [7],
         menuPositions: [11, 12]),
     MenuEntity(
@@ -142,7 +142,7 @@ class MenuEntity {
         isSpicy: false,
         isVegan: false,
         ingredients: [25, 26, 27],
-        images: ['image13.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [8],
         menuPositions: [13]),
     MenuEntity(
@@ -155,7 +155,7 @@ class MenuEntity {
         isSpicy: false,
         isVegan: true,
         ingredients: [28, 29, 30],
-        images: ['image14.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [9],
         menuPositions: [14]),
     MenuEntity(
@@ -168,7 +168,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [31, 32, 33],
-        images: ['image15.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [10],
         menuPositions: [15]),
     MenuEntity(
@@ -181,7 +181,7 @@ class MenuEntity {
         isSpicy: false,
         isVegan: false,
         ingredients: [34, 35, 36],
-        images: ['image16.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [11],
         menuPositions: [16]),
     MenuEntity(
@@ -194,7 +194,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [37, 38, 39],
-        images: ['image17.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [12],
         menuPositions: [17, 18]),
     MenuEntity(
@@ -207,7 +207,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [40, 41, 42],
-        images: ['image18.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [13],
         menuPositions: [19]),
     MenuEntity(
@@ -220,7 +220,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: true,
         ingredients: [43, 44, 45],
-        images: ['image19.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [14],
         menuPositions: [20, 21]),
     MenuEntity(
@@ -233,7 +233,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [46, 47, 48],
-        images: ['image20.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [1, 4],
         menuPositions: [22]),
     MenuEntity(
@@ -246,7 +246,7 @@ class MenuEntity {
         isSpicy: false,
         isVegan: true,
         ingredients: [49, 50, 51],
-        images: ['image21.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [2, 11],
         menuPositions: [23]),
     MenuEntity(
@@ -259,7 +259,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [52, 53, 54],
-        images: ['image22.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [5],
         menuPositions: [24, 25]),
     MenuEntity(
@@ -272,7 +272,7 @@ class MenuEntity {
         isSpicy: false,
         isVegan: false,
         ingredients: [55, 56, 57],
-        images: ['image23.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [9],
         menuPositions: [26]),
     MenuEntity(
@@ -285,7 +285,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [58, 59, 60],
-        images: ['image24.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [2, 6],
         menuPositions: [27]),
     MenuEntity(
@@ -298,7 +298,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [61, 62, 63],
-        images: ['image25.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [4, 8],
         menuPositions: [28]),
     MenuEntity(
@@ -311,7 +311,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: true,
         ingredients: [64, 65, 66],
-        images: ['image26.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [4],
         menuPositions: [29]),
     MenuEntity(
@@ -324,7 +324,7 @@ class MenuEntity {
         isSpicy: false,
         isVegan: true,
         ingredients: [67, 68, 69],
-        images: ['image27.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [13],
         menuPositions: [30]),
     MenuEntity(
@@ -337,7 +337,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: false,
         ingredients: [70, 71, 72],
-        images: ['image28.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [5],
         menuPositions: [31]),
     MenuEntity(
@@ -350,7 +350,7 @@ class MenuEntity {
         isSpicy: true,
         isVegan: true,
         ingredients: [73, 74, 75],
-        images: ['image29.png'],
+        images: ['lib/core/assets/food_images/product_one.jpg'],
         labels: [1, 2],
         menuPositions: [32]),
   ];
