@@ -8,6 +8,7 @@ import 'package:food_delivery_app/features/food_delivery/presentation/screens/co
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/filters/filters_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/main/main_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/notifications/notifications_screen.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/profile/profile_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sale_details_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sales_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/settings/settings_screen.dart';
@@ -81,6 +82,11 @@ class AppRoutes {
             path: 'auth',
             name: RouteNames.authorizationScreen,
             builder: (context, state) => const AuthScreen(),
+          ),
+          GoRoute(
+            path: 'profile',
+            name: RouteNames.profileScreen,
+            builder: (context, state) => const ProfileScreen(),
           ),
         ],
       ),

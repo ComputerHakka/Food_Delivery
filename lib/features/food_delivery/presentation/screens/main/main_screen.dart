@@ -5,6 +5,7 @@ import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/category.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/sale.dart';
 import 'package:go_router/go_router.dart';
+import 'package:marqueer/marqueer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MainScreen extends StatelessWidget {
@@ -15,6 +16,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       drawer: const DrawerMenuWidget(),
       appBar: AppBar(
+        title: const AppBarMainTitle(),
         actions: const [
           IconButton(
             onPressed: null,
@@ -220,9 +222,14 @@ class DrawerMenuWidget extends StatelessWidget {
                       width: 30,
                     ),
                     const SizedBox(width: 10),
-                    SvgPicture.asset(
-                      'lib/core/assets/images/telegram_logo.svg',
-                      width: 30,
+                    GestureDetector(
+                      onTap: () {
+                        GoRouter.of(context).goNamed(RouteNames.profileScreen);
+                      },
+                      child: SvgPicture.asset(
+                        'lib/core/assets/images/telegram_logo.svg',
+                        width: 30,
+                      ),
                     ),
                   ],
                 )
@@ -297,6 +304,44 @@ class MenuCategoryWidget extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class AppBarMainTitle extends StatelessWidget {
+  const AppBarMainTitle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        borderRadius: BorderRadiusDirectional.circular(10),
+      ),
+      child: Row(
+        children: [
+          const Text('Доставка'),
+          const SizedBox(width: 15),
+          Expanded(
+            child: SizedBox(
+              height: 25,
+              child: Marqueer(
+                pps: 30,
+                restartAfterInteractionDuration: const Duration(seconds: 2),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    'ул. Рашпилевская, д 315/1',
+                    style: TextStyle(fontWeight: FontWeight.normal),
+                    maxLines: 1,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
