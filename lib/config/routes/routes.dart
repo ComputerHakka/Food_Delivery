@@ -65,7 +65,10 @@ class AppRoutes {
           GoRoute(
             path: 'catalog',
             name: RouteNames.catalogScreen,
-            builder: (context, state) => const CatalogScreen(),
+            builder: (context, state) {
+              int index = state.extra as int;
+              return CatalogScreen(index: index);
+            },
             routes: [
               GoRoute(
                 path: 'filter',

@@ -71,6 +71,7 @@ class MainScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return MenuCategoryWidget(
                         category: CategoryEntity.categoriesList[index],
+                        index: index,
                       );
                     },
                   ),
@@ -165,7 +166,8 @@ class DrawerMenuWidget extends StatelessWidget {
                   title: const Text('Каталог'),
                   leading: const Icon(Icons.my_library_books_outlined),
                   onTap: () {
-                    GoRouter.of(context).goNamed(RouteNames.catalogScreen);
+                    GoRouter.of(context)
+                        .goNamed(RouteNames.catalogScreen, extra: 0);
                   },
                 ),
                 ListTile(
@@ -255,8 +257,10 @@ class SaleBannerWidget extends StatelessWidget {
 }
 
 class MenuCategoryWidget extends StatelessWidget {
-  const MenuCategoryWidget({super.key, required this.category});
+  const MenuCategoryWidget(
+      {super.key, required this.category, required this.index});
 
+  final int index;
   final CategoryEntity category;
 
   @override
@@ -270,7 +274,10 @@ class MenuCategoryWidget extends StatelessWidget {
         ),
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
-          onTap: () {},
+          onTap: () {
+            GoRouter.of(context)
+                .goNamed(RouteNames.catalogScreen, extra: index);
+          },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,

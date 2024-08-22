@@ -6,7 +6,8 @@ import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.da
 import 'package:go_router/go_router.dart';
 
 class CatalogScreen extends StatefulWidget {
-  const CatalogScreen({super.key});
+  const CatalogScreen({super.key, required this.index});
+  final int index;
 
   @override
   State<CatalogScreen> createState() => _CatalogScreenState();
@@ -15,7 +16,19 @@ class CatalogScreen extends StatefulWidget {
 class _CatalogScreenState extends State<CatalogScreen> {
   int _selectedIndex = 0; // Индекс выбранной категории
   String _currentTitle = 'Народный';
-  final PageController _pageController = PageController();
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    if (widget.index != 0) {
+      _selectedIndex = widget.index;
+      _pageController = PageController(initialPage: _selectedIndex);
+      _currentTitle = CategoryEntity.categoriesList[_selectedIndex].name;
+    } else {
+      _pageController = PageController();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
