@@ -40,8 +40,8 @@ class CartScreen extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  for (var menu in state.cartItems.keys)
-                    _CartItemCell(item: menu),
+                  for (var menu in state.cartItems.entries)
+                    _CartItemCell(item: menu.key, count: menu.value),
                 ],
               ),
             );
@@ -54,9 +54,10 @@ class CartScreen extends StatelessWidget {
 }
 
 class _CartItemCell extends StatelessWidget {
-  const _CartItemCell({super.key, required this.item});
+  const _CartItemCell({super.key, required this.item, required this.count});
 
   final MenuEntity item;
+  final int count;
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +106,7 @@ class _CartItemCell extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(item.cost.toString()),
+                    Text('${(item.cost * count).toString()} ₽'),
                     Container(
                       width: 100,
                       height: 30,
