@@ -67,7 +67,7 @@ class AppRoutes {
             path: 'catalog',
             name: RouteNames.catalogScreen,
             builder: (context, state) {
-              int index = state.extra as int;
+              int? index = state.extra as int?;
               return CatalogScreen(index: index);
             },
             routes: [

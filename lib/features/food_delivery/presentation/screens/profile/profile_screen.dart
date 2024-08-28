@@ -90,7 +90,16 @@ class _ProfilePoint extends StatelessWidget {
         ),
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
-          onTap: isChangeble ? () {} : null,
+          onTap: isChangeble
+              ? () {
+                  showBottomSheet(
+                    context: context,
+                    constraints: BoxConstraints(
+                        maxHeight: MediaQuery.of(context).size.height / 3.5),
+                    builder: (_) => _ChangeProfileSheet(title: title),
+                  );
+                }
+              : null,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
@@ -110,6 +119,62 @@ class _ProfilePoint extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _ChangeProfileSheet extends StatelessWidget {
+  const _ChangeProfileSheet({
+    super.key,
+    required this.title,
+    this.hint,
+    this.agreement,
+  });
+
+  final String title;
+  final String? hint;
+  final String? agreement;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: Column(
+        children: [
+          Container(
+            width: 25,
+            height: 4,
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(children: [Text(title)]),
+          const SizedBox(height: 20),
+          TextField(
+            decoration: InputDecoration(
+              enabledBorder: const OutlineInputBorder(),
+              focusedBorder: const OutlineInputBorder(),
+              hintText: hint ?? title,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('ОТМЕНА'),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('ГОТОВО'),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

@@ -36,7 +36,7 @@ class SaleEntity {
       description:
           'Забудь о доставке — сосредоточься на еде!\n\nТеперь все заказы от 1000 рублей доставляются бесплатно прямо к твоей двери. Никаких дополнительных расходов, только чистое удовольствие от любимых блюд.\n\nЗакажи сейчас и получи свой заказ с комфортом!',
       salePositions: [6, 7, 8],
-      imagePath: 'lib/core/assets/sales_images/sale1.webp',
+      imagePath: 'lib/core/assets/sales_images/free_delivery.webp',
     ),
     SaleEntity(
       id: 4,
@@ -44,7 +44,7 @@ class SaleEntity {
       description:
           'Сладкий сюрприз к каждому заказу!\n\nСделай заказ на сумму от 1500 рублей и получи десерт в подарок. Это может быть восхитительный торт, нежное пирожное или любимый мороженое — все для того, чтобы сделать твой день слаще.\n\nПоторопись, акция ограничена!',
       salePositions: [9, 10],
-      imagePath: 'lib/core/assets/sales_images/sale1.webp',
+      imagePath: 'lib/core/assets/sales_images/sweet_gift.webp',
     ),
     SaleEntity(
       id: 5,

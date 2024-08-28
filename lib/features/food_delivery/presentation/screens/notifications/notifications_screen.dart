@@ -9,13 +9,19 @@ class NotificationsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Уведомления'),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Здесь будет интересно!'),
-            Text('Специально для вас мы сохраним все уведомления'),
-            Text('Теперь ни одна классная акция не пройдет мимо'),
+            Image.asset(
+              'lib/core/assets/images/notifications.png',
+              height: 250,
+            ),
+            const Text('Здесь будет интересно!'),
+            const SizedBox(height: 15),
+            const Text('Специально для вас мы сохраним все уведомления'),
+            const SizedBox(height: 10),
+            const Text('Теперь ни одна классная акция не пройдет мимо'),
           ],
         ),
       ),

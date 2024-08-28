@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery_app/config/theme/app_themes.dart';
 import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/category.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/sale.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:marqueer/marqueer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,12 +27,7 @@ class MainScreen extends StatelessWidget {
         ],
         scrolledUnderElevation: 0,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          GoRouter.of(context).goNamed(RouteNames.cartScreen);
-        },
-        child: const Icon(Icons.shopping_basket_outlined),
-      ),
+      floatingActionButton: const CartFloatingActionButtonWidget(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -82,6 +79,69 @@ class MainScreen extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CartFloatingActionButtonWidget extends StatelessWidget {
+  const CartFloatingActionButtonWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton.extended(
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      onPressed: () {
+        GoRouter.of(context).goNamed(RouteNames.cartScreen);
+      },
+      label: BlocBuilder<CartBloc, CartState>(
+        builder: (context, state) {
+          if (state is CartLoadingState) {
+            return const CircularProgressIndicator(strokeWidth: 10);
+          }
+
+          if (state is CartNotEmptyState) {
+            return Column(
+              children: [
+                Row(
+                  children: [
+                    Stack(
+                      children: [
+                        const Icon(Icons.shopping_basket_outlined),
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: CircleAvatar(
+                            radius: 7,
+                            backgroundColor: Colors.red,
+                            child: Text(
+                              state.getCount().toString(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 5),
+                    Text('${state.getCost().toString()}₽'),
+                  ],
+                ),
+                const Text('60 мин')
+              ],
+            );
+          }
+
+          if (state is CartEmptyState) {
+            return const Icon(Icons.shopping_basket_outlined);
+          }
+
+          return const SizedBox.shrink();
+        },
       ),
     );
   }
@@ -168,8 +228,7 @@ class DrawerMenuWidget extends StatelessWidget {
                   title: const Text('Каталог'),
                   leading: const Icon(Icons.my_library_books_outlined),
                   onTap: () {
-                    GoRouter.of(context)
-                        .goNamed(RouteNames.catalogScreen, extra: 0);
+                    GoRouter.of(context).goNamed(RouteNames.catalogScreen);
                   },
                 ),
                 ListTile(
