@@ -45,6 +45,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   url_launcher: ^6.3.0
   marqueer: ^1.4.5
+  dotted_border: ^2.1.0
   flutter_localizations:
     sdk: flutter
 

@@ -37,13 +37,52 @@ class CartScreen extends StatelessWidget {
             );
           }
           if (state is CartNotEmptyState) {
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  for (var menu in state.cartItems.entries)
-                    _CartItemCell(item: menu.key, count: menu.value),
-                ],
-              ),
+            return Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (var menu in state.cartItems.entries)
+                          _CartItemCell(item: menu.key, count: menu.value),
+                        const Text('Добавить к заказу?'),
+                        const TextField(
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder()),
+                        ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Товары'),
+                            Text('data'),
+                          ],
+                        ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [Text('Доставка'), Text('150₽')],
+                        ),
+                        const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [Text('ИТОГО'), Text('data')],
+                        ),
+                        Container(
+                          child: const Row(
+                            children: [
+                              Icon(Icons.card_giftcard_outlined),
+                              Expanded(
+                                child: Text(
+                                    '226 бонусов будет начислено за оформление заказа'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                ElevatedButton(onPressed: () {}, child: const Text('ОФОРМИТЬ'))
+              ],
             );
           }
           return const SizedBox.shrink();
@@ -114,7 +153,7 @@ class _CartItemCell extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.red,
                       ),
-                      child: Row(),
+                      child: const Row(),
                     ),
                   ],
                 )
