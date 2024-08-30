@@ -1,9 +1,11 @@
 import 'package:food_delivery_app/core/constants/constants.dart';
+import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/sale.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/auth/auth_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/bonuses/bonuses_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/cart/cart_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/catalog_screen.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/product_details_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/copmany_info/company_information_scrre.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/filters/filters_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/main/main_screen.dart';
@@ -90,6 +92,13 @@ class AppRoutes {
           ),
         ],
       ),
+      GoRoute(
+          path: '/product_details',
+          name: RouteNames.productDetailsScreen,
+          builder: (context, state) {
+            var menu = state.extra as MenuEntity;
+            return ProductDetailsScreen(menu: menu);
+          })
       // GoRoute(
       //   path: '/',
       //   name: RouteNames.loaderScreen,

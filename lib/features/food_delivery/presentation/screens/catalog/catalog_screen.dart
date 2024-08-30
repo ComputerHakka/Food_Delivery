@@ -173,115 +173,132 @@ class _MenuCell extends StatelessWidget {
             )
           ],
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 220,
-                  child: ClipRRect(
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(10)),
-                    child: Image.asset(
-                      'lib/core/assets/food_images/product_one.jpg',
-                      fit: BoxFit.cover,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: () {
+            GoRouter.of(context)
+                .pushNamed(RouteNames.productDetailsScreen, extra: product);
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 220,
+                    child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.vertical(top: Radius.circular(10)),
+                      child: Image.asset(
+                        'lib/core/assets/food_images/product_one.jpg',
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.favorite_border_outlined),
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.favorite_border_outlined),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('${product.weight}г. • 8 шт.'),
-                  Text(product.name.toUpperCase()),
-                  const Text(
-                    'замес краб-микс, лосось, огурец, соус унаги, рис, нори',
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('${product.cost} ₽'),
-                      BlocBuilder<CartBloc, CartState>(
-                        builder: (context, state) {
-                          if (state is CartNotEmptyState) {
-                            if (state.cartItems.containsKey(product)) {
-                              return Ink(
-                                height: 40,
-                                width: 125.7,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primaryContainer,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: InkWell(
-                                        onTap: () {
-                                          BlocProvider.of<CartBloc>(context)
-                                              .add(AddProductEvent(
-                                                  menu: product));
-                                        },
-                                        borderRadius:
-                                            const BorderRadius.horizontal(
-                                                left: Radius.circular(50)),
-                                        child: SizedBox(
-                                          height: double.infinity,
-                                          child: Icon(
-                                            Icons.add,
-                                            color: onPrimary,
+                ],
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 11),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('${product.weight}г. • 8 шт.'),
+                    Text(product.name.toUpperCase()),
+                    const Text(
+                      'замес краб-микс, лосось, огурец, соус унаги, рис, нори',
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('${product.cost} ₽'),
+                        BlocBuilder<CartBloc, CartState>(
+                          builder: (context, state) {
+                            if (state is CartNotEmptyState) {
+                              if (state.cartItems.containsKey(product)) {
+                                return Ink(
+                                  height: 40,
+                                  width: 125.7,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primaryContainer,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: () {
+                                            BlocProvider.of<CartBloc>(context)
+                                                .add(AddProductEvent(
+                                                    menu: product));
+                                          },
+                                          borderRadius:
+                                              const BorderRadius.horizontal(
+                                                  left: Radius.circular(50)),
+                                          child: SizedBox(
+                                            height: double.infinity,
+                                            child: Icon(
+                                              Icons.add,
+                                              color: onPrimary,
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      child: SizedBox(
-                                        child: Text(
-                                          state.cartItems[product].toString(),
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(color: onPrimary),
-                                        ),
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: InkWell(
-                                        onTap: () {
-                                          BlocProvider.of<CartBloc>(context)
-                                              .add(RemoveProductEvent(
-                                                  menu: product));
-                                        },
-                                        borderRadius:
-                                            const BorderRadius.horizontal(
-                                                right: Radius.circular(50)),
+                                      Expanded(
                                         child: SizedBox(
-                                          height: double.infinity,
-                                          child: Icon(
-                                            Icons.remove,
-                                            color: onPrimary,
+                                          child: Text(
+                                            state.cartItems[product].toString(),
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(color: onPrimary),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            } else {
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: () {
+                                            BlocProvider.of<CartBloc>(context)
+                                                .add(RemoveProductEvent(
+                                                    menu: product));
+                                          },
+                                          borderRadius:
+                                              const BorderRadius.horizontal(
+                                                  right: Radius.circular(50)),
+                                          child: SizedBox(
+                                            height: double.infinity,
+                                            child: Icon(
+                                              Icons.remove,
+                                              color: onPrimary,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              } else {
+                                return ElevatedButton(
+                                  onPressed: () {
+                                    BlocProvider.of<CartBloc>(context)
+                                        .add(AddProductEvent(menu: product));
+                                  },
+                                  child: const Text('В КОРЗИНУ'),
+                                );
+                              }
+                            }
+                            if (state is CartEmptyState) {
                               return ElevatedButton(
                                 onPressed: () {
                                   BlocProvider.of<CartBloc>(context)
@@ -290,25 +307,16 @@ class _MenuCell extends StatelessWidget {
                                 child: const Text('В КОРЗИНУ'),
                               );
                             }
-                          }
-                          if (state is CartEmptyState) {
-                            return ElevatedButton(
-                              onPressed: () {
-                                BlocProvider.of<CartBloc>(context)
-                                    .add(AddProductEvent(menu: product));
-                              },
-                              child: const Text('В КОРЗИНУ'),
-                            );
-                          }
-                          return const SizedBox.shrink();
-                        },
-                      )
-                    ],
-                  ),
-                ],
+                            return const SizedBox.shrink();
+                          },
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

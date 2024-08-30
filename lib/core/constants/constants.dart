@@ -10,6 +10,7 @@ class RouteNames {
   static const userServicesScreen = 'user_services_screen';
   static const salesScreen = 'sales_screen';
   static const saleDetailsScreen = 'sale_details_screen';
+  static const productDetailsScreen = 'product_details_screen';
   static const notifiactionsScreen = 'notifications_screen';
   static const bonusesScreen = 'bonuses_screen';
   static const cartScreen = 'cart_screen';

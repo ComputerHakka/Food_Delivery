@@ -5,9 +5,9 @@ import 'package:food_delivery_app/config/theme/app_themes.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
 import 'package:food_delivery_app/injection_container.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initializeDependencies();
+  await initializeDependencies();
   runApp(const MyApp());
 }
 
