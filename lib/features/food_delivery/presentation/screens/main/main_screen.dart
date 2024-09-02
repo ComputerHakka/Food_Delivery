@@ -5,6 +5,7 @@ import 'package:food_delivery_app/config/theme/app_themes.dart';
 import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/category.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/sale.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/auth/auth_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:marqueer/marqueer.dart';
@@ -172,22 +173,37 @@ class DrawerMenuWidget extends StatelessWidget {
                 onTap: () {
                   GoRouter.of(context).goNamed(RouteNames.authorizationScreen);
                 },
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   child: Row(
                     children: [
-                      CircleAvatar(),
-                      SizedBox(
+                      const CircleAvatar(),
+                      const SizedBox(
                         width: 15,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Привет'),
-                          Text('Войти'),
-                        ],
-                      )
+                      BlocBuilder<AuthBloc, AuthState>(
+                        builder: (context, state) {
+                          if (state is AuthorizedState) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(state.user!.name),
+                                Text(state.user!.phone),
+                              ],
+                            );
+                          }
+                          return const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Привет'),
+                              Text('Войти'),
+                            ],
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -200,7 +216,6 @@ class DrawerMenuWidget extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              physics: const NeverScrollableScrollPhysics(),
               children: [
                 ListTile(
                   title: const Text('Уведомления'),
@@ -210,11 +225,43 @@ class DrawerMenuWidget extends StatelessWidget {
                         .goNamed(RouteNames.notifiactionsScreen);
                   },
                 ),
+                BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    if (state is AuthorizedState) {
+                      return Column(
+                        children: [
+                          ListTile(
+                            title: const Text('Избранное'),
+                            leading: const Icon(Icons.favorite_border_rounded),
+                            onTap: () {},
+                          ),
+                          ListTile(
+                            title: const Text('История заказов'),
+                            leading: const Icon(Icons.history_rounded),
+                            onTap: () {},
+                          ),
+                        ],
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ),
                 ListTile(
                   title: const Text('Бонусы'),
                   leading: const Icon(Icons.wallet_giftcard_rounded),
                   onTap: () {
                     GoRouter.of(context).goNamed(RouteNames.bonusesScreen);
+                  },
+                ),
+                BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    if (state is AuthorizedState) {
+                      return const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(),
+                      );
+                    }
+                    return const SizedBox.shrink();
                   },
                 ),
                 ListTile(
@@ -234,7 +281,10 @@ class DrawerMenuWidget extends StatelessWidget {
                 ListTile(
                   title: const Text('Условия доставки'),
                   leading: const Icon(Icons.pedal_bike_rounded),
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context)
+                        .goNamed(RouteNames.deliveryConditionsScreen);
+                  },
                 ),
                 ListTile(
                   title: const Text('Настройки'),
@@ -259,6 +309,21 @@ class DrawerMenuWidget extends StatelessWidget {
                     await launchUrl(smsLaunchUri);
                   },
                 ),
+                BlocBuilder<AuthBloc, AuthState>(
+                  builder: (context, state) {
+                    if (state is AuthorizedState) {
+                      return ListTile(
+                        title: const Text('Выход'),
+                        leading: const Icon(Icons.exit_to_app_rounded),
+                        onTap: () {
+                          BlocProvider.of<AuthBloc>(context)
+                              .add(const LogOutEvent());
+                        },
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  },
+                )
               ],
             ),
           ),

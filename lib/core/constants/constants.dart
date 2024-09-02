@@ -18,4 +18,5 @@ class RouteNames {
   static const companyInfoScreen = 'company_info_screen';
   static const catalogScreen = 'catalog_screen';
   static const filterScreen = 'filter_screen';
+  static const deliveryConditionsScreen = 'delivery_conditions_screen';
 }

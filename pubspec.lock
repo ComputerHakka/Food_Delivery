@@ -57,6 +57,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  crypto:
+    dependency: transitive
+    description:
+      name: crypto
+      sha256: ec30d999af904f33454ba22ed9a86162b35e52b44ac4807d1d93c288041d7d27
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.5"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -105,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
+  fixnum:
+    dependency: transitive
+    description:
+      name: fixnum
+      sha256: "25517a4deb0c03aa0f32fd12db525856438902d9c16536311e76cdc57b31d7d1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -131,6 +147,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: "9ee02950848f61c4129af3d6ec84a1cfc0e47931abc746b03e7a3bc3e8ff6eda"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.22"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -426,6 +450,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+  sprintf:
+    dependency: transitive
+    description:
+      name: sprintf
+      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0"
   stack_trace:
     dependency: transitive
     description:
@@ -538,6 +570,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
+  uuid:
+    dependency: transitive
+    description:
+      name: uuid
+      sha256: f33d6bb662f0e4f79dcd7ada2e6170f3b3a2530c28fc41f49a411ddedd576a77
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.5.0"
   vector_graphics:
     dependency: transitive
     description:
@@ -602,6 +642,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.5.0"
+  yandex_maps_mapkit:
+    dependency: "direct main"
+    description:
+      name: yandex_maps_mapkit
+      sha256: "78ed464f276e36aad20bfad16df9a62ae534e4831cd24d1bba0ae1384476d6f4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.7.2-beta4"
 sdks:
   dart: ">=3.5.0 <4.0.0"
   flutter: ">=3.24.0"

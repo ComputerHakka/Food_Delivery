@@ -47,6 +47,7 @@ dependencies:
   marqueer: ^1.4.5
   dotted_border: ^2.1.0
   shared_preferences: ^2.3.2
+  yandex_maps_mapkit: ^4.7.0
   flutter_localizations:
     sdk: flutter
 

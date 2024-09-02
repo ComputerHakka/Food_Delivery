@@ -1,12 +1,15 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/sale.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/auth/auth_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/auth/auth_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/bonuses/bonuses_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/cart/cart_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/catalog_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/product_details_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/copmany_info/company_information_scrre.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/delivery_conditions/delivery_conditions_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/filters/filters_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/main/main_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/notifications/notifications_screen.dart';
@@ -81,9 +84,20 @@ class AppRoutes {
             ],
           ),
           GoRoute(
+            path: 'delivery',
+            name: RouteNames.deliveryConditionsScreen,
+            builder: (context, state) => const DeliveryConditionsScreen(),
+          ),
+          GoRoute(
             path: 'auth',
             name: RouteNames.authorizationScreen,
             builder: (context, state) => const AuthScreen(),
+            redirect: (context, state) {
+              final state = context.read<AuthBloc>().state;
+              if (state is AuthorizedState) return '/main/profile';
+
+              return null;
+            },
           ),
           GoRoute(
             path: 'profile',

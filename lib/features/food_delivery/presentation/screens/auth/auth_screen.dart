@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/auth/auth_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -57,24 +60,41 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
                 Expanded(
                   child: RichText(
-                      text: TextSpan(
-                    children: [
-                      TextSpan(text: 'Я согласен с ', style: basicText),
-                      TextSpan(
-                          text: 'политикой конфиденциальности, ',
-                          style: linkText),
-                      TextSpan(
-                          text: 'пользовательским соглашением ',
-                          style: linkText),
-                      TextSpan(
-                          text:
-                              'и даю разрешение на обработку персональных данных.',
-                          style: basicText),
-                    ],
-                  )),
-                )
+                    text: TextSpan(
+                      children: [
+                        TextSpan(text: 'Я согласен с ', style: basicText),
+                        TextSpan(
+                            text: 'политикой конфиденциальности, ',
+                            style: linkText),
+                        TextSpan(
+                            text: 'пользовательским соглашением ',
+                            style: linkText),
+                        TextSpan(
+                            text:
+                                'и даю разрешение на обработку персональных данных.',
+                            style: basicText),
+                      ],
+                    ),
+                  ),
+                ),
               ],
-            )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                BlocProvider.of<AuthBloc>(context).add(const LogInEvent());
+                //GoRouter.of(context).refresh();
+              },
+              child: const Text('Вход'),
+            ),
+            BlocListener(
+              listener: (context, state) {
+                if (state is AuthorizedState) {
+                  GoRouter.of(context).refresh();
+                }
+              },
+              bloc: BlocProvider.of<AuthBloc>(context),
+              child: const SizedBox.shrink(),
+            ),
           ],
         ),
       ),
