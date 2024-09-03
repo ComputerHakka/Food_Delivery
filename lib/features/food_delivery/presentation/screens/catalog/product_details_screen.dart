@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/ingredient.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/label.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({super.key, required this.menu});
@@ -265,31 +267,36 @@ class ProductDetailsScreen extends StatelessWidget {
               BlocBuilder<CartBloc, CartState>(
                 builder: (context, state) {
                   if (state is CartNotEmptyState) {
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Stack(
-                          children: [
-                            const Icon(
-                              Icons.shopping_basket_outlined,
-                            ),
-                            Positioned(
-                              top: 0,
-                              right: 0,
-                              child: CircleAvatar(
-                                radius: 8,
-                                backgroundColor: Colors.red,
-                                child: Text(
-                                  state.getCount().toString(),
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 12),
+                    return GestureDetector(
+                      onTap: () {
+                        GoRouter.of(context).pushNamed(RouteNames.cartScreen);
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Stack(
+                            children: [
+                              const Icon(
+                                Icons.shopping_basket_outlined,
+                              ),
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child: CircleAvatar(
+                                  radius: 8,
+                                  backgroundColor: Colors.red,
+                                  child: Text(
+                                    state.getCount().toString(),
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 12),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Text(state.getCost().toString()),
-                      ],
+                            ],
+                          ),
+                          Text(state.getCost().toString()),
+                        ],
+                      ),
                     );
                   }
                   if (state is CartEmptyState) {

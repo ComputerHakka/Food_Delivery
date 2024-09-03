@@ -10,10 +10,10 @@ const Color lightButton = Color(0xFFD6E7F8);
 const Color splashButtonColor = Color.fromARGB(255, 133, 216, 255);
 
 final ThemeData appTheme = ThemeData(
-  appBarTheme: appBarTheme,
-  colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-  useMaterial3: true,
-);
+    appBarTheme: appBarTheme,
+    colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+    useMaterial3: true,
+    bottomSheetTheme: BottomSheetThemeData());
 
 const AppBarTheme appBarTheme = AppBarTheme(
   scrolledUnderElevation: 0,

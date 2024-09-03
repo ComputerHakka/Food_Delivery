@@ -54,11 +54,6 @@ class AppRoutes {
             ],
           ),
           GoRoute(
-            path: 'cart',
-            name: RouteNames.cartScreen,
-            builder: (context, state) => const CartScreen(),
-          ),
-          GoRoute(
             path: 'company_info',
             name: RouteNames.companyInfoScreen,
             builder: (context, state) => const CompanyInformationScreen(),
@@ -105,6 +100,11 @@ class AppRoutes {
             builder: (context, state) => const ProfileScreen(),
           ),
         ],
+      ),
+      GoRoute(
+        path: '/cart',
+        name: RouteNames.cartScreen,
+        builder: (context, state) => const CartScreen(),
       ),
       GoRoute(
           path: '/product_details',

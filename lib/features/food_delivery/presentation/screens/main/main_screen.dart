@@ -95,7 +95,7 @@ class CartFloatingActionButtonWidget extends StatelessWidget {
     return FloatingActionButton.extended(
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       onPressed: () {
-        GoRouter.of(context).goNamed(RouteNames.cartScreen);
+        GoRouter.of(context).pushNamed(RouteNames.cartScreen);
       },
       label: BlocBuilder<CartBloc, CartState>(
         builder: (context, state) {
