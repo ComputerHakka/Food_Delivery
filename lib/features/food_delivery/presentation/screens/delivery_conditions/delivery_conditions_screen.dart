@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/config/theme/app_themes.dart';
 import 'package:yandex_maps_mapkit/image.dart' as image;
 import 'package:yandex_maps_mapkit/mapkit.dart';
 import 'package:yandex_maps_mapkit/mapkit_factory.dart';
 import 'package:yandex_maps_mapkit/yandex_map.dart';
+import 'package:flutter/src/painting/text_style.dart' as text_style;
 
 class DeliveryConditionsScreen extends StatefulWidget {
   const DeliveryConditionsScreen({super.key});
@@ -18,9 +20,9 @@ class _DeliveryConditionsScreenState extends State<DeliveryConditionsScreen> {
   final deliveryTimes = {
     '50 мин.': const Color.fromARGB(88, 155, 39, 176),
     '60 мин.': const Color.fromARGB(88, 33, 149, 243),
-    '90 мин.': const Color.fromARGB(88, 255, 152, 0),
-    '120 мин.': const Color.fromARGB(88, 255, 0, 0),
-    '150 мин.': const Color.fromARGB(88, 0, 255, 0),
+    '80 мин.': const Color.fromARGB(88, 255, 152, 0),
+    '90 мин.': const Color.fromARGB(88, 255, 0, 0),
+    '120 мин.': const Color.fromARGB(88, 0, 255, 0),
   };
 
   final explainsPay = <String, String>{
@@ -77,11 +79,25 @@ class _DeliveryConditionsScreenState extends State<DeliveryConditionsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Условия доставки'),
+                          const Text(
+                            'Условия доставки',
+                            style: text_style.TextStyle(fontSize: 18),
+                          ),
+                          const SizedBox(height: 15),
                           const Text(
                             'Укажите адрес доставки или выбирете на карте для определения времени ожидания заказа',
+                            style: text_style.TextStyle(
+                                fontSize: 17, color: textFieldTextColor),
                           ),
-                          const Text('Как оплатить заказ?'),
+                          const SizedBox(height: 15),
+                          const Text(
+                            'Как оплатить заказ?',
+                            style: text_style.TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
                           Column(
                             children: [
                               _ExplainBox(
@@ -99,7 +115,14 @@ class _DeliveryConditionsScreenState extends State<DeliveryConditionsScreen> {
                             ],
                           ),
                           const SizedBox(height: 20),
-                          const Text('Как получить свой заказ?'),
+                          const Text(
+                            'Как получить свой заказ?',
+                            style: text_style.TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 15),
                           Column(
                             children: [
                               _ExplainBox(
@@ -189,15 +212,14 @@ class _DeliveryConditionsScreenState extends State<DeliveryConditionsScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                const Row(
+                const SizedBox(height: 10),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      'Условия доставки',
-                    ),
+                    Text('Условия доставки', style: textStyleMain),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 40,
@@ -314,7 +336,11 @@ class _ExplainBox extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(title),
+              Text(
+                title,
+                style: const text_style.TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 16),
+              ),
               const CircleAvatar(
                 backgroundColor: Color.fromARGB(181, 244, 67, 54),
                 radius: 15,
@@ -322,7 +348,11 @@ class _ExplainBox extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 20),
-          Text(explain),
+          Text(
+            explain,
+            style: const text_style.TextStyle(
+                fontSize: 15, color: textFieldTextColor),
+          ),
         ],
       ),
     );

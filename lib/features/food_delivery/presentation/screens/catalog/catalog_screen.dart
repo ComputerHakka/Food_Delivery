@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_app/config/theme/app_themes.dart';
 import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/category.dart';
+import 'package:food_delivery_app/features/food_delivery/domain/entities/ingredient.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/label.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/product_details_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/main/main_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -40,7 +43,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
       body: Column(
         children: [
           SizedBox(
-            height: 136.0,
+            height: 146.0,
             child: Column(
               children: [
                 Container(
@@ -84,8 +87,19 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     },
                   ),
                 ),
+                Container(height: 10, color: Colors.white),
+                const Divider(height: 0, thickness: 0.5),
                 Container(
-                  decoration: const BoxDecoration(color: Colors.white),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 5.0,
+                        offset: Offset(0.0, 1),
+                      ),
+                    ],
+                  ),
                   height: 56,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,7 +112,14 @@ class _CatalogScreenState extends State<CatalogScreen> {
                             },
                             icon: const Icon(Icons.arrow_back),
                           ),
-                          Text(_currentTitle),
+                          const SizedBox(width: 25),
+                          Text(
+                            _currentTitle,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ],
                       ),
                       IconButton(
@@ -125,6 +146,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
               itemCount: CategoryEntity.categoriesList.length,
               itemBuilder: (context, index) {
                 return ListView.builder(
+                  physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(16),
                   itemCount: MenuEntity.menuList.length,
                   shrinkWrap: true,
@@ -148,15 +170,17 @@ class _MenuCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> labels = [];
-
-    if (product.labels != null) {
-      for (int label in product.labels!) {
-        labels.add(MenuLabelEntity.labelsList[label - 1].name);
-      }
-    }
-
-    final onPrimary = Theme.of(context).colorScheme.onPrimaryContainer;
+    List<MenuLabelEntity> labels = product.labels
+            ?.map((e) =>
+                MenuLabelEntity.labelsList.firstWhere((el) => el.id == e))
+            .toList() ??
+        [];
+    List<String> ingredients = product.ingredients
+            ?.map((e) => IngredientEntity.ingredients
+                .firstWhere((el) => el.id == e)
+                .name)
+            .toList() ??
+        [];
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
@@ -196,6 +220,20 @@ class _MenuCell extends StatelessWidget {
                       ),
                     ),
                   ),
+                  if (labels.isNotEmpty)
+                    Positioned(
+                      top: 10,
+                      right: 10,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          for (var label in labels)
+                            LabelWidget(
+                              label: label,
+                            ),
+                        ],
+                      ),
+                    ),
                   Positioned(
                     right: 0,
                     bottom: 0,
@@ -212,17 +250,40 @@ class _MenuCell extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('${product.weight}г. • 8 шт.'),
-                    Text(product.name.toUpperCase()),
-                    const Text(
-                      'замес краб-микс, лосось, огурец, соус унаги, рис, нори',
+                    Text(
+                      '${product.weight}г. • 8 шт.',
+                      style: const TextStyle(
+                        color: textFieldTextColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      product.name.toUpperCase(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      ingredients.join(', '),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: textFieldTextColor),
                     ),
+                    const SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('${product.cost} ₽'),
+                        Text(
+                          '${product.cost} ₽',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
                         BlocBuilder<CartBloc, CartState>(
                           builder: (context, state) {
                             if (state is CartNotEmptyState) {
@@ -231,41 +292,11 @@ class _MenuCell extends StatelessWidget {
                                   height: 40,
                                   width: 125.7,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primaryContainer,
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: onPrimaryContainers,
                                   ),
                                   child: Row(
                                     children: [
-                                      Expanded(
-                                        child: InkWell(
-                                          onTap: () {
-                                            BlocProvider.of<CartBloc>(context)
-                                                .add(AddProductEvent(
-                                                    menu: product));
-                                          },
-                                          borderRadius:
-                                              const BorderRadius.horizontal(
-                                                  left: Radius.circular(50)),
-                                          child: SizedBox(
-                                            height: double.infinity,
-                                            child: Icon(
-                                              Icons.add,
-                                              color: onPrimary,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: SizedBox(
-                                          child: Text(
-                                            state.cartItems[product].toString(),
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(color: onPrimary),
-                                          ),
-                                        ),
-                                      ),
                                       Expanded(
                                         child: InkWell(
                                           onTap: () {
@@ -275,12 +306,42 @@ class _MenuCell extends StatelessWidget {
                                           },
                                           borderRadius:
                                               const BorderRadius.horizontal(
-                                                  right: Radius.circular(50)),
-                                          child: SizedBox(
+                                                  left: Radius.circular(10)),
+                                          child: const SizedBox(
                                             height: double.infinity,
                                             child: Icon(
                                               Icons.remove,
-                                              color: onPrimary,
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: SizedBox(
+                                          child: Text(
+                                            state.cartItems[product].toString(),
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                                color: Colors.red,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: InkWell(
+                                          onTap: () {
+                                            BlocProvider.of<CartBloc>(context)
+                                                .add(AddProductEvent(
+                                                    menu: product));
+                                          },
+                                          borderRadius:
+                                              const BorderRadius.horizontal(
+                                                  right: Radius.circular(10)),
+                                          child: const SizedBox(
+                                            height: double.infinity,
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.red,
                                             ),
                                           ),
                                         ),

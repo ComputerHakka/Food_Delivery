@@ -10,9 +10,11 @@ import 'package:food_delivery_app/features/food_delivery/presentation/screens/ca
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/product_details_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/copmany_info/company_information_scrre.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/delivery_conditions/delivery_conditions_screen.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/favorite/favorite_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/filters/filters_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/main/main_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/notifications/notifications_screen.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/order_history/order_history_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/profile/profile_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sale_details_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sales_screen.dart';
@@ -34,6 +36,16 @@ class AppRoutes {
             builder: (context, state) => const NotificationsScreen(),
           ),
           GoRoute(
+            path: 'favorite',
+            name: RouteNames.favoriteScreen,
+            builder: (context, state) => const FavoriteScreen(),
+          ),
+          GoRoute(
+            path: 'order_history',
+            name: RouteNames.orderHistoryScreen,
+            builder: (context, state) => const OrderHistoryScreen(),
+          ),
+          GoRoute(
             path: 'bonuses',
             name: RouteNames.bonusesScreen,
             builder: (context, state) => const BonusesScreen(),
@@ -42,16 +54,6 @@ class AppRoutes {
             path: 'sales',
             name: RouteNames.salesScreen,
             builder: (context, state) => const SalesScreen(),
-            routes: [
-              GoRoute(
-                path: 'sale_details',
-                name: RouteNames.saleDetailsScreen,
-                builder: (context, state) {
-                  SaleEntity sale = state.extra as SaleEntity;
-                  return SaleDetailsScreen(sale: sale);
-                },
-              ),
-            ],
           ),
           GoRoute(
             path: 'company_info',
@@ -100,6 +102,14 @@ class AppRoutes {
             builder: (context, state) => const ProfileScreen(),
           ),
         ],
+      ),
+      GoRoute(
+        path: '/sale_details',
+        name: RouteNames.saleDetailsScreen,
+        builder: (context, state) {
+          SaleEntity sale = state.extra as SaleEntity;
+          return SaleDetailsScreen(sale: sale);
+        },
       ),
       GoRoute(
         path: '/cart',

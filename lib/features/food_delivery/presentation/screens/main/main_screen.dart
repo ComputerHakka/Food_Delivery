@@ -29,57 +29,159 @@ class MainScreen extends StatelessWidget {
         scrolledUnderElevation: 0,
       ),
       floatingActionButton: const CartFloatingActionButtonWidget(),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: 150,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: SaleEntity.salesNow.length,
-                itemBuilder: (context, index) {
-                  return SaleBannerWidget(sale: SaleEntity.salesNow[index]);
-                },
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-              width: double.infinity,
-              height: 100,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.deepPurple,
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              width: double.infinity,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Меню'),
-                  GridView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 0.9,
-                    ),
-                    itemCount: CategoryEntity.categoriesList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return MenuCategoryWidget(
-                        category: CategoryEntity.categoriesList[index],
-                        index: index,
-                      );
-                    },
-                  ),
-                ],
-              ),
-            )
+            SizedBox(height: 10),
+            _SalesListWidget(),
+            _GreetingsWidget(),
+            SizedBox(height: 10),
+            _SomethingCoolWidget(),
+            SizedBox(height: 20),
+            _SelectableCategoriesWidget()
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _GreetingsWidget extends StatelessWidget {
+  const _GreetingsWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthorizedState) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Привет, ${state.user!.name}',
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    Ink(
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(5),
+                        onTap: () {
+                          GoRouter.of(context)
+                              .goNamed(RouteNames.bonusesScreen);
+                        },
+                        child: const Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 5, horizontal: 7),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                'Бонусы',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const Text(
+                  'Ты словно праздник',
+                )
+              ],
+            ),
+          );
+        }
+        return const SizedBox.shrink();
+      },
+    );
+  }
+}
+
+class _SelectableCategoriesWidget extends StatelessWidget {
+  const _SelectableCategoriesWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Меню', style: textStyleMain),
+          GridView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 0.9,
+            ),
+            itemCount: CategoryEntity.categoriesList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return MenuCategoryWidget(
+                category: CategoryEntity.categoriesList[index],
+                index: index,
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SomethingCoolWidget extends StatelessWidget {
+  const _SomethingCoolWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+      width: double.infinity,
+      height: 100,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: const Color.fromARGB(255, 253, 209, 209),
+      ),
+    );
+  }
+}
+
+class _SalesListWidget extends StatelessWidget {
+  const _SalesListWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 150,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: SaleEntity.salesNow.length,
+        itemBuilder: (context, index) {
+          return SaleBannerWidget(sale: SaleEntity.salesNow[index]);
+        },
       ),
     );
   }
@@ -166,7 +268,6 @@ class DrawerMenuWidget extends StatelessWidget {
               height: 55,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.cyan,
               ),
               child: InkWell(
                 borderRadius: BorderRadius.circular(10),
@@ -189,7 +290,13 @@ class DrawerMenuWidget extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(state.user!.name),
+                                Text(
+                                  state.user!.name,
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                                 Text(state.user!.phone),
                               ],
                             );
@@ -198,7 +305,13 @@ class DrawerMenuWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Привет'),
+                              Text(
+                                'Привет',
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               Text('Войти'),
                             ],
                           );
@@ -233,12 +346,18 @@ class DrawerMenuWidget extends StatelessWidget {
                           ListTile(
                             title: const Text('Избранное'),
                             leading: const Icon(Icons.favorite_border_rounded),
-                            onTap: () {},
+                            onTap: () {
+                              GoRouter.of(context)
+                                  .goNamed(RouteNames.favoriteScreen);
+                            },
                           ),
                           ListTile(
                             title: const Text('История заказов'),
                             leading: const Icon(Icons.history_rounded),
-                            onTap: () {},
+                            onTap: () {
+                              GoRouter.of(context)
+                                  .goNamed(RouteNames.orderHistoryScreen);
+                            },
                           ),
                         ],
                       );
@@ -266,7 +385,7 @@ class DrawerMenuWidget extends StatelessWidget {
                 ),
                 ListTile(
                   title: const Text('Акции'),
-                  leading: const Icon(Icons.sell_outlined),
+                  leading: const Icon(Icons.local_fire_department),
                   onTap: () {
                     GoRouter.of(context).goNamed(RouteNames.salesScreen);
                   },
@@ -337,7 +456,10 @@ class DrawerMenuWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('ПРИСОЕДИНЯЙТЕСЬ К НАМ'),
+                const Text(
+                  'ПРИСОЕДИНЯЙТЕСЬ К НАМ',
+                  style: TextStyle(fontSize: 12),
+                ),
                 const SizedBox(height: 15),
                 Row(
                   children: [
@@ -347,9 +469,7 @@ class DrawerMenuWidget extends StatelessWidget {
                     ),
                     const SizedBox(width: 10),
                     GestureDetector(
-                      onTap: () {
-                        GoRouter.of(context).goNamed(RouteNames.profileScreen);
-                      },
+                      onTap: () {},
                       child: SvgPicture.asset(
                         'lib/core/assets/images/telegram_logo.svg',
                         width: 30,
@@ -373,14 +493,20 @@ class SaleBannerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(5),
-      width: 170,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        image: DecorationImage(
-          image: AssetImage(sale.imagePath!),
-          fit: BoxFit.fill,
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context)
+            .pushNamed(RouteNames.saleDetailsScreen, extra: sale);
+      },
+      child: Container(
+        margin: const EdgeInsets.all(5),
+        width: 170,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          image: DecorationImage(
+            image: AssetImage(sale.imagePath!),
+            fit: BoxFit.fill,
+          ),
         ),
       ),
     );
@@ -441,12 +567,12 @@ class AppBarMainTitle extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: mainScreenTitleColor,
         borderRadius: BorderRadiusDirectional.circular(10),
       ),
       child: Row(
         children: [
-          const Text('Доставка'),
+          const Text('Доставка', style: TextStyle(fontSize: 16)),
           const SizedBox(width: 15),
           Expanded(
             child: SizedBox(
@@ -455,10 +581,11 @@ class AppBarMainTitle extends StatelessWidget {
                 pps: 30,
                 restartAfterInteractionDuration: const Duration(seconds: 2),
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 3),
                   child: Text(
                     'ул. Рашпилевская, д 315/1',
-                    style: TextStyle(fontWeight: FontWeight.normal),
+                    style:
+                        TextStyle(fontWeight: FontWeight.normal, fontSize: 16),
                     maxLines: 1,
                   ),
                 ),

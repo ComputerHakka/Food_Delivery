@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_app/core/constants/constants.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/auth/auth_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class BonusesScreen extends StatelessWidget {
   const BonusesScreen({super.key});
@@ -15,7 +19,6 @@ class BonusesScreen extends StatelessWidget {
           children: [
             _BonusBannerWidget(),
             _AuthHintWidget(),
-            Divider(),
             _HowItWorksWidget(),
           ],
         ),
@@ -23,8 +26,6 @@ class BonusesScreen extends StatelessWidget {
     );
   }
 }
-
-TextStyle bonusText = const TextStyle(color: Colors.white);
 
 class _BonusBannerWidget extends StatelessWidget {
   const _BonusBannerWidget({
@@ -53,23 +54,32 @@ class _BonusBannerWidget extends StatelessWidget {
                 height: 190,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'На счету',
-                    style: bonusText,
+                    style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                   Text(
                     '0 бонусов',
-                    style: bonusText,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 27,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     'Правила начисления бонусов',
-                    style: bonusText,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        decoration: TextDecoration.underline,
+                        decorationStyle: TextDecorationStyle.dashed,
+                        decorationColor: Colors.white),
                   ),
                 ],
               ),
@@ -88,26 +98,85 @@ class _AuthHintWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 3.5,
-      child: Ink(
-        padding: const EdgeInsets.symmetric(vertical: 7.5),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(10),
-          onTap: () {},
-          child: const Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 25,
-              vertical: 15,
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthorizedState) {
+          return Column(
+            children: [
+              Ink(
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: () {},
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'История бонусов',
+                          style: TextStyle(fontSize: 17),
+                        ),
+                        Icon(Icons.chevron_right_rounded)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const Divider(),
+              Ink(
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: () {},
+                  child: const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Пригласить друга',
+                          style: TextStyle(fontSize: 17),
+                        ),
+                        Icon(Icons.chevron_right_rounded)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        }
+        return Column(
+          children: [
+            AspectRatio(
+              aspectRatio: 3.5,
+              child: Ink(
+                padding: const EdgeInsets.symmetric(vertical: 7.5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(10),
+                  onTap: () {
+                    GoRouter.of(context)
+                        .pushNamed(RouteNames.authorizationScreen);
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 25,
+                      vertical: 15,
+                    ),
+                    child: Text(
+                      'Авторизируйтесь, чтобы увидеть количество ваших бонусных баллов и историю из начисления',
+                      style: TextStyle(fontSize: 17, height: 1.2),
+                    ),
+                  ),
+                ),
+              ),
             ),
-            child: Text(
-                'Авторизируйтесь, чтобы увидеть количество ваших бонусных баллов и историю из начисления'),
-          ),
-        ),
-      ),
+            const Divider(),
+          ],
+        );
+      },
     );
   }
 }
@@ -130,7 +199,9 @@ class _HowItWorksWidget extends StatelessWidget {
             leading: CircleAvatar(),
           ),
           ListTile(
-            title: Text('Получай бонусные баллы с каждой покупки'),
+            title: Text(
+              'Получай бонусные баллы с каждой покупки',
+            ),
             leading: CircleAvatar(),
           ),
           ListTile(

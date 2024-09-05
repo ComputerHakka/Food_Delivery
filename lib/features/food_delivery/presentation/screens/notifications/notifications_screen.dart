@@ -17,11 +17,30 @@ class NotificationsScreen extends StatelessWidget {
               'lib/core/assets/images/notifications.png',
               height: 250,
             ),
-            const Text('Здесь будет интересно!'),
+            const Text(
+              'Здесь будет интересно!',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 15),
-            const Text('Специально для вас мы сохраним все уведомления'),
-            const SizedBox(height: 10),
-            const Text('Теперь ни одна классная акция не пройдет мимо'),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Специально для вас мы сохраним все уведомления',
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Теперь ни одна классная акция не пройдет мимо',
+                    style: TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

@@ -108,8 +108,21 @@ class _ProfilePoint extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(title),
-                      value != null ? Text(value!) : const SizedBox.shrink(),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                        ),
+                      ),
+                      value != null
+                          ? Text(
+                              value!,
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
+                            )
+                          : const SizedBox.shrink(),
                     ],
                   ),
                 ),
@@ -164,7 +177,7 @@ class _ChangeProfileSheet extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(
+              OutlinedButton(
                 onPressed: () {},
                 child: const Text('ОТМЕНА'),
               ),
@@ -193,7 +206,7 @@ class _ChangePhotoWidget extends StatelessWidget {
         children: [
           const CircleAvatar(),
           const SizedBox(width: 16),
-          ElevatedButton(
+          OutlinedButton(
             onPressed: () {},
             child: const Text('Добавить фото'),
           )

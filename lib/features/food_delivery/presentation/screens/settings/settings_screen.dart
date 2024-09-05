@@ -20,10 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
-            child: Text('Тема'),
-          ),
+          const SizedBox(height: 20),
           ListTile(
             title: const Text('Светлая тема'),
             leading: Radio(

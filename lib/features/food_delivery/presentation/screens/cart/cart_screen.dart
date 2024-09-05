@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_delivery_app/config/theme/app_themes.dart';
+import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sale_details_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -25,12 +29,24 @@ class CartScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width / 1.3,
                   ),
                   const SizedBox(height: 20),
-                  const Text('Корзина пуста :('),
-                  const Text('Добавьте что-нибудь из меню'),
+                  const Text(
+                    'Корзина пуста :(',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Добавьте что-нибудь из меню',
+                    style: TextStyle(fontSize: 18),
+                  ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('В каталог'),
+                    onPressed: () {
+                      GoRouter.of(context).goNamed(RouteNames.catalogScreen);
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text('В КАТАЛОГ'),
+                    ),
                   ),
                 ],
               ),
@@ -44,36 +60,85 @@ class CartScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const SizedBox(height: 16),
                         for (var menu in state.cartItems.entries)
                           _CartItemCell(item: menu.key, count: menu.value),
-                        const Text('Добавить к заказу?'),
-                        const TextField(
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder()),
+                        const SizedBox(height: 30),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            'Добавить к заказу?',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('Товары'),
-                            Text('data'),
-                          ],
+                        const SizedBox(height: 5),
+                        SizedBox(
+                          height: 130,
+                          child: ListView.builder(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 7.5),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: MenuEntity.menuList.length,
+                            itemBuilder: (context, index) {
+                              if (index < 5) {
+                                return SalePositionWidget(
+                                  menu: MenuEntity.menuList[index],
+                                );
+                              }
+                              return null;
+                            },
+                          ),
                         ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text('Доставка'), Text('150₽')],
-                        ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [Text('ИТОГО'), Text('data')],
-                        ),
-                        Container(
-                          child: const Row(
+                        const SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
                             children: [
-                              Icon(Icons.card_giftcard_outlined),
-                              Expanded(
-                                child: Text(
-                                    '226 бонусов будет начислено за оформление заказа'),
+                              const TextField(
+                                decoration: InputDecoration(
+                                  hintText: 'Есть промокод',
+                                ),
                               ),
+                              const SizedBox(height: 20),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text('Товары', style: basicStyle),
+                                  Text(state.getCost().toString(),
+                                      style: basicStyle),
+                                ],
+                              ),
+                              const Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Доставка', style: basicStyle),
+                                  Text('150.0', style: basicStyle)
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text('ИТОГО', style: totalStyle),
+                                  Text((state.getCost() + 150).toString(),
+                                      style: totalStyle)
+                                ],
+                              ),
+                              // const SizedBox(
+                              //   child: Row(
+                              //     children: [
+                              //       Icon(Icons.card_giftcard_outlined),
+                              //       Expanded(
+                              //         child: Text(
+                              //             '226 бонусов будет начислено за оформление заказа'),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -81,7 +146,25 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                ElevatedButton(onPressed: () {}, child: const Text('ОФОРМИТЬ'))
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 4.0,
+                        offset: Offset(0.0, -1.5),
+                      ),
+                    ],
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('ОФОРМИТЬ'),
+                  ),
+                ),
               ],
             );
           }
@@ -91,6 +174,15 @@ class CartScreen extends StatelessWidget {
     );
   }
 }
+
+const TextStyle basicStyle = TextStyle(
+  color: textFieldTextColor,
+);
+
+const TextStyle totalStyle = TextStyle(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+);
 
 class _CartItemCell extends StatelessWidget {
   const _CartItemCell({super.key, required this.item, required this.count});

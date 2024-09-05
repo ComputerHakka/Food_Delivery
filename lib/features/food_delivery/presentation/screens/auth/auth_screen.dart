@@ -11,10 +11,12 @@ class AuthScreen extends StatefulWidget {
 }
 
 TextStyle basicText = const TextStyle(
+  fontSize: 15,
   color: Colors.black,
   height: 1.5,
 );
 TextStyle linkText = const TextStyle(
+  fontSize: 15,
   color: Colors.black,
   decoration: TextDecoration.underline,
   decorationColor: Colors.black,
@@ -28,13 +30,18 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        elevation: 0,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Ну что? Начнем!'),
+            const Text(
+              'Ну что? Начнем!',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 15),
               child: TextField(
@@ -46,7 +53,8 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ),
             ),
-            const Text('На номер поступит звонок или SMS'),
+            Text('На номер поступит звонок или SMS', style: basicText),
+            const SizedBox(height: 30),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -79,12 +87,27 @@ class _AuthScreenState extends State<AuthScreen> {
                 ),
               ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                BlocProvider.of<AuthBloc>(context).add(const LogInEvent());
-                //GoRouter.of(context).refresh();
-              },
-              child: const Text('Вход'),
+            const SizedBox(height: 20),
+            Expanded(
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        BlocProvider.of<AuthBloc>(context)
+                            .add(const LogInEvent());
+                      },
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Text('ВХОД'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             BlocListener(
               listener: (context, state) {

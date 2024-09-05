@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/sale.dart';
+import 'package:go_router/go_router.dart';
 
 class SaleDetailsScreen extends StatelessWidget {
   const SaleDetailsScreen({super.key, required this.sale});
@@ -114,7 +116,11 @@ class SalePositionWidget extends StatelessWidget {
         ),
         child: InkWell(
           borderRadius: BorderRadius.circular(10),
-          onTap: () {},
+          onTap: () {
+            GoRouter.of(context).pushReplacementNamed(
+                RouteNames.productDetailsScreen,
+                extra: menu);
+          },
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Row(
@@ -136,14 +142,23 @@ class SalePositionWidget extends StatelessWidget {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('${menu.weight} г.'),
+                      Text(
+                        '${menu.weight} г.',
+                        style: const TextStyle(
+                            fontSize: 12,
+                            color: Color.fromARGB(255, 116, 116, 116)),
+                      ),
                       Text(
                         menu.name.toUpperCase(),
                         maxLines: 2,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Text('${menu.cost} Р'),
+                      Text(
+                        '${menu.cost} Р',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ],
                   ),
                 ),
