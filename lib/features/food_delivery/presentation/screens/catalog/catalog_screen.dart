@@ -146,20 +146,64 @@ class _CatalogScreenState extends State<CatalogScreen> {
               },
               itemCount: CategoryEntity.categoriesList.length,
               itemBuilder: (context, index) {
-                return ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.all(16),
-                  itemCount: MenuEntity.menuList.length,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return MenuCell(product: MenuEntity.menuList[index]);
-                  },
-                );
+                final products = MenuEntity.menuList
+                    .where((e) =>
+                        e.categoryId ==
+                        index +
+                            1) //разобраться почему при _selected index не работает та же дич с переключением на разные страницы
+                    .toList();
+                return ProductsListPageWidget(products: products);
               },
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class ProductsListPageWidget extends StatefulWidget {
+  const ProductsListPageWidget({
+    super.key,
+    required this.products,
+  });
+
+  final List<MenuEntity> products;
+
+  @override
+  State<ProductsListPageWidget> createState() => _ProductsListPageWidgetState();
+}
+
+class _ProductsListPageWidgetState extends State<ProductsListPageWidget>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+
+    if (widget.products.isEmpty) {
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 60),
+          child: Text(
+            'В данной категории нет товаров в наличии :(',
+            style: TextStyle(fontSize: 18),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+
+    return ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      padding: const EdgeInsets.all(16),
+      itemCount: widget.products.length,
+      shrinkWrap: true,
+      itemBuilder: (BuildContext context, int index) {
+        return MenuCell(product: widget.products[index]);
+      },
     );
   }
 }
@@ -216,7 +260,7 @@ class MenuCell extends StatelessWidget {
                       borderRadius:
                           const BorderRadius.vertical(top: Radius.circular(10)),
                       child: Image.asset(
-                        'lib/core/assets/food_images/product_one.jpg',
+                        product.images!.first,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -263,7 +307,10 @@ class MenuCell extends StatelessWidget {
                                 .read<FavoriteBloc>()
                                 .add(AddFavoriteEvent(menu: product));
                           },
-                          icon: const Icon(Icons.favorite_border_outlined),
+                          icon: const Icon(
+                            Icons.favorite_border_outlined,
+                            color: Colors.white,
+                          ),
                         );
                       },
                     ),

@@ -39,16 +39,14 @@ class FavoriteScreen extends StatelessWidget {
                 ],
               );
             } else {
-              return Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.all(16),
-                  itemCount: state.favoriteMenus.length,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return MenuCell(product: state.favoriteMenus[index]);
-                  },
-                ),
+              return ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.all(16),
+                itemCount: state.favoriteMenus.length,
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) {
+                  return MenuCell(product: state.favoriteMenus[index]);
+                },
               );
             }
           }

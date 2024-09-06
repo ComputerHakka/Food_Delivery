@@ -40,10 +40,7 @@ class AppRoutes {
           GoRoute(
             path: 'favorite',
             name: RouteNames.favoriteScreen,
-            builder: (context, state) => BlocProvider<FavoriteBloc>(
-              create: (context) => container()..add(const GetFavoriteEvent()),
-              child: const FavoriteScreen(),
-            ),
+            builder: (context, state) => const FavoriteScreen(),
           ),
           GoRoute(
             path: 'order_history',
@@ -75,10 +72,7 @@ class AppRoutes {
             name: RouteNames.catalogScreen,
             builder: (context, state) {
               int? index = state.extra as int?;
-              return BlocProvider<FavoriteBloc>(
-                create: (context) => container()..add(const GetFavoriteEvent()),
-                child: CatalogScreen(index: index),
-              );
+              return CatalogScreen(index: index);
             },
             routes: [
               GoRoute(
@@ -129,10 +123,7 @@ class AppRoutes {
         name: RouteNames.productDetailsScreen,
         builder: (context, state) {
           var menu = state.extra as MenuEntity;
-          return BlocProvider<FavoriteBloc>(
-            create: (context) => container()..add(const GetFavoriteEvent()),
-            child: ProductDetailsScreen(menu: menu),
-          );
+          return ProductDetailsScreen(menu: menu);
         },
       ),
       // GoRoute(

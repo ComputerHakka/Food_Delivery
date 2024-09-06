@@ -5,6 +5,7 @@ import 'package:food_delivery_app/features/food_delivery/domain/entities/ingredi
 import 'package:food_delivery_app/features/food_delivery/domain/entities/label.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sale_details_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -34,8 +35,7 @@ class ProductDetailsScreen extends StatelessWidget {
           Stack(
             children: [
               Image.asset(
-                menu.images?.first ??
-                    'lib/core/assets/food_images/product_one.jpg',
+                menu.images?.first ?? 'lib/core/assets/food_images/margo.jpg',
                 width: double.infinity,
                 height: 250,
                 fit: BoxFit.cover,
@@ -64,6 +64,42 @@ class ProductDetailsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+              Positioned(
+                right: 0,
+                bottom: 0,
+                child: BlocBuilder<FavoriteBloc, FavoriteState>(
+                  builder: (context, state) {
+                    if (state is FavoriteLoadedState) {
+                      if (state.favoriteMenus
+                              .any((element) => element.id == menu.id) ==
+                          true) {
+                        return IconButton(
+                          onPressed: () {
+                            context
+                                .read<FavoriteBloc>()
+                                .add(RemoveFavoriteEvent(menu: menu));
+                          },
+                          icon: const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                          ),
+                        );
+                      }
+                    }
+                    return IconButton(
+                      onPressed: () {
+                        context
+                            .read<FavoriteBloc>()
+                            .add(AddFavoriteEvent(menu: menu));
+                      },
+                      icon: const Icon(
+                        Icons.favorite_border_outlined,
+                        color: Colors.white,
+                      ),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
           Padding(

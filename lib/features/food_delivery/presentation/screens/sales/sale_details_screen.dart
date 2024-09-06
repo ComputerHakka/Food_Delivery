@@ -129,9 +129,10 @@ class SalePositionWidget extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: const DecorationImage(
+                      image: DecorationImage(
                         image: AssetImage(
-                          'lib/core/assets/food_images/product_one.jpg',
+                          menu.images?.first ??
+                              'lib/core/assets/food_images/sushi.jpg',
                         ),
                         fit: BoxFit.fill,
                       ),

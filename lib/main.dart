@@ -4,6 +4,7 @@ import 'package:food_delivery_app/config/routes/routes.dart';
 import 'package:food_delivery_app/config/theme/app_themes.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/auth/auth_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:food_delivery_app/injection_container.dart';
 import 'package:yandex_maps_mapkit/init.dart' as init;
 
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthBloc>(
           create: (context) => container()..add(const CheckAuthEvent()),
         ),
+        BlocProvider<FavoriteBloc>(
+            create: (context) => container()..add(const GetFavoriteEvent())),
       ],
       child: MaterialApp.router(
         title: 'Food Delivery',
