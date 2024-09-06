@@ -1,5 +1,6 @@
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/auth/auth_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,4 +12,5 @@ Future<void> initializeDependencies() async {
 
   container.registerFactory<CartBloc>(() => CartBloc());
   container.registerFactory<AuthBloc>(() => AuthBloc(container()));
+  container.registerFactory<FavoriteBloc>(() => FavoriteBloc(container()));
 }

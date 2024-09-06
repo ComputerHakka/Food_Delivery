@@ -69,6 +69,7 @@ class _ProfilePoint extends StatelessWidget {
   final String title;
   final String? value;
   final bool isChangeble;
+
   final Function? callback;
 
   @override

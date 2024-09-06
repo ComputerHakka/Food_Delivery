@@ -3,6 +3,7 @@ import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/sale.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/auth/auth_bloc.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/auth/auth_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/bonuses/bonuses_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/cart/cart_screen.dart';
@@ -19,6 +20,7 @@ import 'package:food_delivery_app/features/food_delivery/presentation/screens/pr
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sale_details_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sales_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/settings/settings_screen.dart';
+import 'package:food_delivery_app/injection_container.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRoutes {
@@ -38,7 +40,10 @@ class AppRoutes {
           GoRoute(
             path: 'favorite',
             name: RouteNames.favoriteScreen,
-            builder: (context, state) => const FavoriteScreen(),
+            builder: (context, state) => BlocProvider<FavoriteBloc>(
+              create: (context) => container()..add(const GetFavoriteEvent()),
+              child: const FavoriteScreen(),
+            ),
           ),
           GoRoute(
             path: 'order_history',
@@ -70,7 +75,10 @@ class AppRoutes {
             name: RouteNames.catalogScreen,
             builder: (context, state) {
               int? index = state.extra as int?;
-              return CatalogScreen(index: index);
+              return BlocProvider<FavoriteBloc>(
+                create: (context) => container()..add(const GetFavoriteEvent()),
+                child: CatalogScreen(index: index),
+              );
             },
             routes: [
               GoRoute(
@@ -117,12 +125,16 @@ class AppRoutes {
         builder: (context, state) => const CartScreen(),
       ),
       GoRoute(
-          path: '/product_details',
-          name: RouteNames.productDetailsScreen,
-          builder: (context, state) {
-            var menu = state.extra as MenuEntity;
-            return ProductDetailsScreen(menu: menu);
-          })
+        path: '/product_details',
+        name: RouteNames.productDetailsScreen,
+        builder: (context, state) {
+          var menu = state.extra as MenuEntity;
+          return BlocProvider<FavoriteBloc>(
+            create: (context) => container()..add(const GetFavoriteEvent()),
+            child: ProductDetailsScreen(menu: menu),
+          );
+        },
+      ),
       // GoRoute(
       //   path: '/',
       //   name: RouteNames.loaderScreen,

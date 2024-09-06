@@ -7,6 +7,7 @@ import 'package:food_delivery_app/features/food_delivery/domain/entities/ingredi
 import 'package:food_delivery_app/features/food_delivery/domain/entities/label.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/product_details_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/main/main_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -151,7 +152,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   itemCount: MenuEntity.menuList.length,
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return _MenuCell(product: MenuEntity.menuList[index]);
+                    return MenuCell(product: MenuEntity.menuList[index]);
                   },
                 );
               },
@@ -163,8 +164,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
   }
 }
 
-class _MenuCell extends StatelessWidget {
-  const _MenuCell({super.key, required this.product});
+class MenuCell extends StatelessWidget {
+  const MenuCell({super.key, required this.product});
 
   final MenuEntity product;
 
@@ -237,9 +238,34 @@ class _MenuCell extends StatelessWidget {
                   Positioned(
                     right: 0,
                     bottom: 0,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.favorite_border_outlined),
+                    child: BlocBuilder<FavoriteBloc, FavoriteState>(
+                      builder: (context, state) {
+                        if (state is FavoriteLoadedState) {
+                          if (state.favoriteMenus
+                                  .any((element) => element.id == product.id) ==
+                              true) {
+                            return IconButton(
+                              onPressed: () {
+                                context
+                                    .read<FavoriteBloc>()
+                                    .add(RemoveFavoriteEvent(menu: product));
+                              },
+                              icon: const Icon(
+                                Icons.favorite,
+                                color: Colors.red,
+                              ),
+                            );
+                          }
+                        }
+                        return IconButton(
+                          onPressed: () {
+                            context
+                                .read<FavoriteBloc>()
+                                .add(AddFavoriteEvent(menu: product));
+                          },
+                          icon: const Icon(Icons.favorite_border_outlined),
+                        );
+                      },
                     ),
                   ),
                 ],
