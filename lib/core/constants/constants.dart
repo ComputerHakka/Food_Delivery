@@ -13,6 +13,7 @@ class RouteNames {
   static const productDetailsScreen = 'product_details_screen';
   static const notifiactionsScreen = 'notifications_screen';
   static const bonusesScreen = 'bonuses_screen';
+  static const bonusesHistoryScreen = 'bonuses_history_screen';
   static const cartScreen = 'cart_screen';
   static const settingsScreen = 'settings_screen';
   static const companyInfoScreen = 'company_info_screen';

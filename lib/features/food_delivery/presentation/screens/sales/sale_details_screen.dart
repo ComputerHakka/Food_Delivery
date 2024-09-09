@@ -34,7 +34,7 @@ class SaleDetailsScreen extends StatelessWidget {
                 child: IconButton(
                   icon: const Icon(Icons.arrow_back, color: Colors.black),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    GoRouter.of(context).pop();
                   },
                 ),
               ),

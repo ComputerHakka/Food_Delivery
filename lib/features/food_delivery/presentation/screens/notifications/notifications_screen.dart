@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({super.key});
@@ -13,9 +14,9 @@ class NotificationsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'lib/core/assets/images/notifications.png',
-              height: 250,
+            SvgPicture.asset(
+              'lib/core/assets/images/notifications_image.svg',
+              width: MediaQuery.of(context).size.width / 1.6,
             ),
             const Text(
               'Здесь будет интересно!',
@@ -28,13 +29,13 @@ class NotificationsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Специально для вас мы сохраним все уведомления',
+                    'Специально для вас мы сохраним\nвсе уведомления!',
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 10),
                   Text(
-                    'Теперь ни одна классная акция не пройдет мимо',
+                    'Теперь ни одна классная акция\nне пройдет мимо',
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.center,
                   ),

@@ -157,11 +157,43 @@ class _SomethingCoolWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+      padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
       width: double.infinity,
-      height: 100,
+      height: 125,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: const Color.fromARGB(255, 253, 209, 209),
+          borderRadius: BorderRadius.circular(10),
+          color: const Color.fromARGB(255, 253, 209, 209),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 5.0,
+              offset: Offset(0.0, 4),
+            )
+          ]),
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            'lib/core/assets/images/main_pizza.svg',
+          ),
+          const SizedBox(width: 10),
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Что сегодня на обед?',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  'Вы просто выбираете что по душе, а мы это быстро доставляем!',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
@@ -332,7 +364,10 @@ class DrawerMenuWidget extends StatelessWidget {
               children: [
                 ListTile(
                   title: const Text('Уведомления'),
-                  leading: const Icon(Icons.notifications_none_rounded),
+                  //leading: const Icon(Icons.notifications_none_rounded),
+                  leading: SvgPicture.asset(
+                      'lib/core/assets/drawer_icons/notifications.svg',
+                      width: 21),
                   onTap: () {
                     GoRouter.of(context)
                         .goNamed(RouteNames.notifiactionsScreen);
@@ -345,7 +380,10 @@ class DrawerMenuWidget extends StatelessWidget {
                         children: [
                           ListTile(
                             title: const Text('Избранное'),
-                            leading: const Icon(Icons.favorite_border_rounded),
+                            //leading: const Icon(Icons.favorite_border_rounded),
+                            leading: SvgPicture.asset(
+                                'lib/core/assets/drawer_icons/favorite.svg',
+                                width: 21),
                             onTap: () {
                               GoRouter.of(context)
                                   .goNamed(RouteNames.favoriteScreen);
@@ -353,7 +391,10 @@ class DrawerMenuWidget extends StatelessWidget {
                           ),
                           ListTile(
                             title: const Text('История заказов'),
-                            leading: const Icon(Icons.history_rounded),
+                            //leading: const Icon(Icons.history_rounded),
+                            leading: SvgPicture.asset(
+                                'lib/core/assets/drawer_icons/order_history.svg',
+                                width: 21),
                             onTap: () {
                               GoRouter.of(context)
                                   .goNamed(RouteNames.orderHistoryScreen);
@@ -367,7 +408,10 @@ class DrawerMenuWidget extends StatelessWidget {
                 ),
                 ListTile(
                   title: const Text('Бонусы'),
-                  leading: const Icon(Icons.wallet_giftcard_rounded),
+                  //leading: const Icon(Icons.wallet_giftcard_rounded),
+                  leading: SvgPicture.asset(
+                      'lib/core/assets/drawer_icons/bonuses.svg',
+                      width: 21),
                   onTap: () {
                     GoRouter.of(context).goNamed(RouteNames.bonusesScreen);
                   },
@@ -385,21 +429,30 @@ class DrawerMenuWidget extends StatelessWidget {
                 ),
                 ListTile(
                   title: const Text('Акции'),
-                  leading: const Icon(Icons.local_fire_department),
+                  //leading: const Icon(Icons.local_fire_department),
+                  leading: SvgPicture.asset(
+                      'lib/core/assets/drawer_icons/sales.svg',
+                      width: 21),
                   onTap: () {
                     GoRouter.of(context).goNamed(RouteNames.salesScreen);
                   },
                 ),
                 ListTile(
                   title: const Text('Каталог'),
-                  leading: const Icon(Icons.my_library_books_outlined),
+                  //leading: const Icon(Icons.my_library_books_outlined),
+                  leading: SvgPicture.asset(
+                      'lib/core/assets/drawer_icons/catalog.svg',
+                      width: 21),
                   onTap: () {
                     GoRouter.of(context).goNamed(RouteNames.catalogScreen);
                   },
                 ),
                 ListTile(
                   title: const Text('Условия доставки'),
-                  leading: const Icon(Icons.pedal_bike_rounded),
+                  //leading: const Icon(Icons.pedal_bike_rounded),
+                  leading: SvgPicture.asset(
+                      'lib/core/assets/drawer_icons/delivery.svg',
+                      width: 21),
                   onTap: () {
                     GoRouter.of(context)
                         .goNamed(RouteNames.deliveryConditionsScreen);
@@ -407,21 +460,30 @@ class DrawerMenuWidget extends StatelessWidget {
                 ),
                 ListTile(
                   title: const Text('Настройки'),
-                  leading: const Icon(Icons.settings),
+                  //leading: const Icon(Icons.settings),
+                  leading: SvgPicture.asset(
+                      'lib/core/assets/drawer_icons/theme_settings.svg',
+                      width: 21),
                   onTap: () {
                     GoRouter.of(context).goNamed(RouteNames.settingsScreen);
                   },
                 ),
                 ListTile(
                   title: const Text('О компании'),
-                  leading: const Icon(Icons.work_outline_rounded),
+                  //leading: const Icon(Icons.work_outline_rounded),
+                  leading: SvgPicture.asset(
+                      'lib/core/assets/drawer_icons/company_info.svg',
+                      width: 21),
                   onTap: () {
                     GoRouter.of(context).goNamed(RouteNames.companyInfoScreen);
                   },
                 ),
                 ListTile(
                   title: const Text('Поддержка'),
-                  leading: const Icon(Icons.support_agent_rounded),
+                  //leading: const Icon(Icons.support_agent_rounded),
+                  leading: SvgPicture.asset(
+                      'lib/core/assets/drawer_icons/support.svg',
+                      width: 21),
                   onTap: () async {
                     final Uri smsLaunchUri =
                         Uri(scheme: 'tel', path: '89189810271');
@@ -433,7 +495,10 @@ class DrawerMenuWidget extends StatelessWidget {
                     if (state is AuthorizedState) {
                       return ListTile(
                         title: const Text('Выход'),
-                        leading: const Icon(Icons.exit_to_app_rounded),
+                        //leading: const Icon(Icons.exit_to_app_rounded),
+                        leading: SvgPicture.asset(
+                            'lib/core/assets/drawer_icons/logout.svg',
+                            width: 21),
                         onTap: () {
                           BlocProvider.of<AuthBloc>(context)
                               .add(const LogOutEvent());
@@ -539,10 +604,14 @@ class MenuCategoryWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
-                category.icon,
-                size: 67,
-                color: Colors.red,
+              // Icon(
+              //   category.icon,
+              //   size: 67,
+              //   color: Colors.red,
+              // ),
+              SvgPicture.asset(
+                category.imagePath,
+                height: 60,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),

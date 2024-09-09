@@ -25,8 +25,8 @@ class CartScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(
-                    'lib/core/assets/images/empty_cart_image.svg',
-                    width: MediaQuery.of(context).size.width / 1.3,
+                    'lib/core/assets/images/empty_cart_image_2.svg',
+                    width: MediaQuery.of(context).size.width / 1.7,
                   ),
                   const SizedBox(height: 20),
                   const Text(

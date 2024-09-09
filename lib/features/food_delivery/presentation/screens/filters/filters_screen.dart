@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/features/food_delivery/domain/entities/ingredient.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/label.dart';
 
 class FiltersScreen extends StatefulWidget {
@@ -16,6 +17,8 @@ class _FiltersScreenState extends State<FiltersScreen> {
   bool isVegan = false;
   List<bool> labels = [false, false, false, false, false, false, false];
   List<bool> ingredients = [false, false, false, false, false, false, false];
+  List<int> lebelsIds = [];
+  List<int> ingredientsIds = [];
 
   @override
   Widget build(BuildContext context) {
@@ -94,69 +97,23 @@ class _FiltersScreenState extends State<FiltersScreen> {
                         Wrap(
                           spacing: 10,
                           children: [
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[0].name),
-                              selected: labels[0],
-                              onSelected: (value) {
-                                setState(() {
-                                  labels[0] = !labels[0];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[1].name),
-                              selected: labels[1],
-                              onSelected: (value) {
-                                setState(() {
-                                  labels[1] = !labels[1];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[2].name),
-                              selected: labels[2],
-                              onSelected: (value) {
-                                setState(() {
-                                  labels[2] = !labels[2];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[3].name),
-                              selected: labels[3],
-                              onSelected: (value) {
-                                setState(() {
-                                  labels[3] = !labels[3];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[4].name),
-                              selected: labels[4],
-                              onSelected: (value) {
-                                setState(() {
-                                  labels[4] = !labels[4];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[5].name),
-                              selected: labels[5],
-                              onSelected: (value) {
-                                setState(() {
-                                  labels[5] = !labels[5];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[6].name),
-                              selected: labels[6],
-                              onSelected: (value) {
-                                setState(() {
-                                  labels[6] = !labels[6];
-                                });
-                              },
-                            ),
+                            for (var i = 0; i < 7; i++)
+                              ChoiceChip(
+                                label: Text(MenuLabelEntity.labelsList[i].name),
+                                selected: labels[i],
+                                onSelected: (value) {
+                                  setState(() {
+                                    labels[i] = !labels[i];
+                                    if (labels[i]) {
+                                      lebelsIds.add(
+                                          MenuLabelEntity.labelsList[i].id);
+                                    } else {
+                                      lebelsIds.remove(
+                                          MenuLabelEntity.labelsList[i].id);
+                                    }
+                                  });
+                                },
+                              ),
                           ],
                         ),
                       ],
@@ -176,69 +133,24 @@ class _FiltersScreenState extends State<FiltersScreen> {
                         Wrap(
                           spacing: 10,
                           children: [
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[0].name),
-                              selected: ingredients[0],
-                              onSelected: (value) {
-                                setState(() {
-                                  ingredients[0] = !ingredients[0];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[1].name),
-                              selected: ingredients[1],
-                              onSelected: (value) {
-                                setState(() {
-                                  ingredients[1] = !ingredients[1];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[2].name),
-                              selected: ingredients[2],
-                              onSelected: (value) {
-                                setState(() {
-                                  ingredients[2] = !ingredients[2];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[3].name),
-                              selected: ingredients[3],
-                              onSelected: (value) {
-                                setState(() {
-                                  ingredients[3] = !ingredients[3];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[4].name),
-                              selected: ingredients[4],
-                              onSelected: (value) {
-                                setState(() {
-                                  ingredients[4] = !ingredients[4];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[5].name),
-                              selected: ingredients[5],
-                              onSelected: (value) {
-                                setState(() {
-                                  ingredients[5] = !ingredients[5];
-                                });
-                              },
-                            ),
-                            ChoiceChip(
-                              label: Text(MenuLabelEntity.labelsList[6].name),
-                              selected: ingredients[6],
-                              onSelected: (value) {
-                                setState(() {
-                                  ingredients[6] = !ingredients[6];
-                                });
-                              },
-                            ),
+                            for (var i = 0; i < 7; i++)
+                              ChoiceChip(
+                                label: Text(IngredientEntity.ingredients[i].name
+                                    .toUpperCase()),
+                                selected: ingredients[i],
+                                onSelected: (value) {
+                                  setState(() {
+                                    ingredients[i] = !ingredients[i];
+                                    if (ingredients[i]) {
+                                      ingredientsIds.add(
+                                          IngredientEntity.ingredients[i].id);
+                                    } else {
+                                      ingredientsIds.remove(
+                                          IngredientEntity.ingredients[i].id);
+                                    }
+                                  });
+                                },
+                              ),
                           ],
                         ),
                       ],

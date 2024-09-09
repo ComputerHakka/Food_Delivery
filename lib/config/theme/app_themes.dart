@@ -13,6 +13,7 @@ const Color mainScreenTitleColor = Color(0xFFEDEFEA);
 const Color onPrimaryContainers = Color(0xFFFAD2D3);
 
 final ThemeData appTheme = ThemeData(
+  fontFamily: 'Montserrat',
   appBarTheme: appBarTheme,
   colorScheme: ColorScheme.fromSeed(seedColor: accentColor),
   useMaterial3: true,
@@ -35,40 +36,19 @@ final ThemeData appTheme = ThemeData(
   ),
   checkboxTheme: checkboxTheme,
   inputDecorationTheme: inputDecorationTheme,
-  radioTheme: RadioThemeData(
-    fillColor: WidgetStateProperty.resolveWith<Color>(
-      (Set<WidgetState> states) {
-        if (states.contains(WidgetState.selected)) {
-          return Colors.red;
-        }
+  radioTheme: radioTheme,
+  switchTheme: switchTheme,
+  chipTheme: chipTheme,
+);
+
+final RadioThemeData radioTheme = RadioThemeData(
+  fillColor: WidgetStateProperty.resolveWith<Color>(
+    (Set<WidgetState> states) {
+      if (states.contains(WidgetState.selected)) {
         return Colors.red;
-      },
-    ),
-  ),
-  switchTheme: SwitchThemeData(
-    thumbColor: WidgetStateProperty.resolveWith<Color>(
-      (Set<WidgetState> states) {
-        if (states.contains(WidgetState.selected)) {
-          return Colors.white;
-        }
-        return Colors.grey;
-      },
-    ),
-    trackColor: WidgetStateProperty.resolveWith<Color>(
-      (Set<WidgetState> states) {
-        if (states.contains(WidgetState.selected)) {
-          return Colors.red;
-        }
-        return Colors.white;
-      },
-    ),
-  ),
-  chipTheme: const ChipThemeData(
-    backgroundColor: containersColor,
-    side: BorderSide(color: Colors.transparent),
-    // shape: RoundedRectangleBorder(
-    //   side: BorderSide(color: Colors.transparent),
-    // ),
+      }
+      return Colors.red;
+    },
   ),
 );
 
@@ -80,6 +60,33 @@ const InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   focusedBorder: OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(10)),
     borderSide: BorderSide(color: Colors.black, width: 2),
+  ),
+);
+
+const ChipThemeData chipTheme = ChipThemeData(
+  backgroundColor: containersColor,
+  side: BorderSide(color: Colors.transparent),
+  // shape: RoundedRectangleBorder(
+  //   side: BorderSide(color: Colors.transparent),
+  // ),
+);
+
+final SwitchThemeData switchTheme = SwitchThemeData(
+  thumbColor: WidgetStateProperty.resolveWith<Color>(
+    (Set<WidgetState> states) {
+      if (states.contains(WidgetState.selected)) {
+        return Colors.white;
+      }
+      return Colors.grey;
+    },
+  ),
+  trackColor: WidgetStateProperty.resolveWith<Color>(
+    (Set<WidgetState> states) {
+      if (states.contains(WidgetState.selected)) {
+        return Colors.red;
+      }
+      return Colors.white;
+    },
   ),
 );
 
@@ -122,8 +129,8 @@ final ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
         return accentColor;
       },
     ),
-    textStyle:
-        const WidgetStatePropertyAll(TextStyle(fontWeight: FontWeight.bold)),
+    textStyle: const WidgetStatePropertyAll(
+        TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Montserrat')),
     foregroundColor: const WidgetStatePropertyAll(Colors.white),
     overlayColor: const WidgetStatePropertyAll(splashButtonColor),
     elevation: const WidgetStatePropertyAll(5),
@@ -131,7 +138,7 @@ final ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
 );
 
 TextStyle textStyleMain = const TextStyle(
-  fontWeight: FontWeight.bold,
-  color: Colors.black,
-  fontSize: 21,
-);
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+    fontSize: 21,
+    fontFamily: 'Montserrat');

@@ -198,7 +198,7 @@ class _ProductsListPageWidgetState extends State<ProductsListPageWidget>
 
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 70),
       itemCount: widget.products.length,
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {

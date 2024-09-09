@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/catalog_screen.dart';
@@ -21,6 +22,10 @@ class FavoriteScreen extends StatelessWidget {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SvgPicture.asset(
+                    'lib/core/assets/images/favorite_image.svg',
+                    width: MediaQuery.of(context).size.width / 1.3,
+                  ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     child: Text(

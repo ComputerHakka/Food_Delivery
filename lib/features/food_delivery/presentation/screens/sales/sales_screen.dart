@@ -33,7 +33,8 @@ class _SaleBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).goNamed(RouteNames.saleDetailsScreen, extra: sale);
+        GoRouter.of(context)
+            .pushNamed(RouteNames.saleDetailsScreen, extra: sale);
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),

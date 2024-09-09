@@ -3,8 +3,8 @@ import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/sale.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/auth/auth_bloc.dart';
-import 'package:food_delivery_app/features/food_delivery/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/auth/auth_screen.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/screens/bonuses/bonuses_history.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/bonuses/bonuses_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/cart/cart_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/catalog_screen.dart';
@@ -20,7 +20,6 @@ import 'package:food_delivery_app/features/food_delivery/presentation/screens/pr
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sale_details_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sales_screen.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/settings/settings_screen.dart';
-import 'package:food_delivery_app/injection_container.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRoutes {
@@ -48,10 +47,16 @@ class AppRoutes {
             builder: (context, state) => const OrderHistoryScreen(),
           ),
           GoRoute(
-            path: 'bonuses',
-            name: RouteNames.bonusesScreen,
-            builder: (context, state) => const BonusesScreen(),
-          ),
+              path: 'bonuses',
+              name: RouteNames.bonusesScreen,
+              builder: (context, state) => const BonusesScreen(),
+              routes: [
+                GoRoute(
+                  path: 'bonuses_history',
+                  name: RouteNames.bonusesHistoryScreen,
+                  builder: (context, state) => const BonusesHistoryScreen(),
+                ),
+              ]),
           GoRoute(
             path: 'sales',
             name: RouteNames.salesScreen,

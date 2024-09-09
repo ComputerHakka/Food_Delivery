@@ -6,6 +6,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: const Text('Личные данные'),
       ),
@@ -21,6 +22,7 @@ class ProfileScreen extends StatelessWidget {
             _ProfilePoint(title: 'Эл. почта', value: 'qoifqoiefj@mail.ru'),
             _ProfilePoint(
               title: 'Получать электронные чеки и беречь природу',
+              isChangeble: false,
             ),
             _ProfilePoint(
                 title: 'Дата рождения', value: 'Добавить дату рождения'),
@@ -93,11 +95,18 @@ class _ProfilePoint extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           onTap: isChangeble
               ? () {
-                  showBottomSheet(
+                  showModalBottomSheet(
                     context: context,
+                    isScrollControlled: true,
                     constraints: BoxConstraints(
                         maxHeight: MediaQuery.of(context).size.height / 3.5),
-                    builder: (_) => _ChangeProfileSheet(title: title),
+                    builder: (_) => SingleChildScrollView(
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
+                        child: _ChangeProfileSheet(title: title),
+                      ),
+                    ),
                   );
                 }
               : null,
@@ -165,7 +174,17 @@ class _ChangeProfileSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          Row(children: [Text(title)]),
+          Row(
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 20),
           TextField(
             decoration: InputDecoration(
@@ -178,13 +197,18 @@ class _ChangeProfileSheet extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              OutlinedButton(
-                onPressed: () {},
-                child: const Text('ОТМЕНА'),
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () {},
+                  child: const Text('ОТМЕНА'),
+                ),
               ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('ГОТОВО'),
+              const SizedBox(width: 10),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('ГОТОВО'),
+                ),
               ),
             ],
           )
