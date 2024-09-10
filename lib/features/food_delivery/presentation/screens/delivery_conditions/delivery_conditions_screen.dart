@@ -336,11 +336,15 @@ class _ExplainBox extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                title,
-                style: const text_style.TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 16),
+              Expanded(
+                child: Text(
+                  title,
+                  softWrap: true,
+                  style: const text_style.TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16),
+                ),
               ),
+              const SizedBox(width: 16),
               const CircleAvatar(
                 backgroundColor: Color.fromARGB(181, 244, 67, 54),
                 radius: 15,

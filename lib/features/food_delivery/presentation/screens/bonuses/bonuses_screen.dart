@@ -106,7 +106,10 @@ class _AuthHintWidget extends StatelessWidget {
               Ink(
                 child: InkWell(
                   borderRadius: BorderRadius.circular(10),
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context)
+                        .goNamed(RouteNames.bonusesHistoryScreen);
+                  },
                   child: const Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Row(
