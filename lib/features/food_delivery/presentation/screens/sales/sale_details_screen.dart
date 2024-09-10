@@ -157,7 +157,7 @@ class SalePositionWidget extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '${menu.cost} Р',
+                        '${menu.cost.toInt()}Р',
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],

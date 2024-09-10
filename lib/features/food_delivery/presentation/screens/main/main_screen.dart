@@ -159,7 +159,7 @@ class _SomethingCoolWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
       padding: const EdgeInsets.fromLTRB(0, 16, 16, 16),
       width: double.infinity,
-      height: 125,
+      height: 135,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: const Color.fromARGB(255, 253, 209, 209),
@@ -238,36 +238,46 @@ class CartFloatingActionButtonWidget extends StatelessWidget {
           }
 
           if (state is CartNotEmptyState) {
-            return Column(
-              children: [
-                Row(
-                  children: [
-                    Stack(
-                      children: [
-                        const Icon(Icons.shopping_basket_outlined),
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: CircleAvatar(
-                            radius: 7,
-                            backgroundColor: Colors.red,
-                            child: Text(
-                              state.getCount().toString(),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: Column(
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Stack(
+                        children: [
+                          const Icon(Icons.shopping_basket_outlined),
+                          Positioned(
+                            top: 0,
+                            right: 0,
+                            child: CircleAvatar(
+                              radius: 7,
+                              backgroundColor: Colors.red,
+                              child: Text(
+                                state.getCount().toString(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(width: 5),
-                    Text('${state.getCost().toString()}₽'),
-                  ],
-                ),
-                const Text('60 мин')
-              ],
+                        ],
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        '${state.getCost().toInt().toString()}₽',
+                        style: const TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  const Text(
+                    '60 мин',
+                    style: TextStyle(fontSize: 12),
+                  )
+                ],
+              ),
             );
           }
 
@@ -486,7 +496,7 @@ class DrawerMenuWidget extends StatelessWidget {
                       width: 21),
                   onTap: () async {
                     final Uri smsLaunchUri =
-                        Uri(scheme: 'tel', path: '89189810271');
+                        Uri(scheme: 'tel', path: '89999999999');
                     await launchUrl(smsLaunchUri);
                   },
                 ),

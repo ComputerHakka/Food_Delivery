@@ -106,7 +106,7 @@ class CartScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text('Товары', style: basicStyle),
-                                  Text(state.getCost().toString(),
+                                  Text('${state.getCost().toInt().toString()}₽',
                                       style: basicStyle),
                                 ],
                               ),
@@ -115,7 +115,7 @@ class CartScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text('Доставка', style: basicStyle),
-                                  Text('150.0', style: basicStyle)
+                                  Text('150₽', style: basicStyle)
                                 ],
                               ),
                               const SizedBox(height: 10),
@@ -124,7 +124,8 @@ class CartScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text('ИТОГО', style: totalStyle),
-                                  Text((state.getCost() + 150).toString(),
+                                  Text(
+                                      '${(state.getCost() + 150).toInt().toString()}₽',
                                       style: totalStyle)
                                 ],
                               ),

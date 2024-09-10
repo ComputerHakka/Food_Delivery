@@ -124,7 +124,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       style: const TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     Text(
-                      '${menu.cost} ₽',
+                      '${menu.cost.toInt()} ₽',
                       style: const TextStyle(
                           fontSize: 16, fontWeight: FontWeight.bold),
                     ),
@@ -326,7 +326,11 @@ class ProductDetailsScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Text(state.getCost().toString()),
+                          Text(
+                            '${state.getCost().toInt()}₽',
+                            style: const TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.w600),
+                          ),
                         ],
                       ),
                     );

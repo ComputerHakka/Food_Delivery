@@ -20,6 +20,8 @@ class _FiltersScreenState extends State<FiltersScreen> {
   List<int> lebelsIds = [];
   List<int> ingredientsIds = [];
 
+  void confirmFilters(BuildContext context) {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

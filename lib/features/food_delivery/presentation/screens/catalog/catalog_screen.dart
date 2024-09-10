@@ -368,7 +368,7 @@ class MenuCell extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '${product.cost} ₽',
+                          '${product.cost.toInt()}₽',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
