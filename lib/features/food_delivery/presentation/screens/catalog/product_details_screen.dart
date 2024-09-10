@@ -4,6 +4,7 @@ import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/ingredient.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/label.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/auth/auth_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/sales/sale_details_screen.dart';
@@ -67,36 +68,44 @@ class ProductDetailsScreen extends StatelessWidget {
               Positioned(
                 right: 0,
                 bottom: 0,
-                child: BlocBuilder<FavoriteBloc, FavoriteState>(
+                child: BlocBuilder<AuthBloc, AuthState>(
                   builder: (context, state) {
-                    if (state is FavoriteLoadedState) {
-                      if (state.favoriteMenus
-                              .any((element) => element.id == menu.id) ==
-                          true) {
-                        return IconButton(
-                          onPressed: () {
-                            context
-                                .read<FavoriteBloc>()
-                                .add(RemoveFavoriteEvent(menu: menu));
-                          },
-                          icon: const Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          ),
-                        );
-                      }
+                    if (state is AuthorizedState) {
+                      return BlocBuilder<FavoriteBloc, FavoriteState>(
+                        builder: (context, state) {
+                          if (state is FavoriteLoadedState) {
+                            if (state.favoriteMenus
+                                    .any((element) => element.id == menu.id) ==
+                                true) {
+                              return IconButton(
+                                onPressed: () {
+                                  context
+                                      .read<FavoriteBloc>()
+                                      .add(RemoveFavoriteEvent(menu: menu));
+                                },
+                                icon: const Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                ),
+                              );
+                            }
+                          }
+                          return IconButton(
+                            onPressed: () {
+                              context
+                                  .read<FavoriteBloc>()
+                                  .add(AddFavoriteEvent(menu: menu));
+                            },
+                            icon: const Icon(
+                              Icons.favorite_border_outlined,
+                              color: Colors.white,
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return const SizedBox.shrink();
                     }
-                    return IconButton(
-                      onPressed: () {
-                        context
-                            .read<FavoriteBloc>()
-                            .add(AddFavoriteEvent(menu: menu));
-                      },
-                      icon: const Icon(
-                        Icons.favorite_border_outlined,
-                        color: Colors.white,
-                      ),
-                    );
                   },
                 ),
               ),

@@ -458,16 +458,16 @@ class DrawerMenuWidget extends StatelessWidget {
                         .goNamed(RouteNames.deliveryConditionsScreen);
                   },
                 ),
-                ListTile(
-                  title: const Text('Настройки'),
-                  //leading: const Icon(Icons.settings),
-                  leading: SvgPicture.asset(
-                      'lib/core/assets/drawer_icons/theme_settings.svg',
-                      width: 21),
-                  onTap: () {
-                    GoRouter.of(context).goNamed(RouteNames.settingsScreen);
-                  },
-                ),
+                // ListTile(
+                //   title: const Text('Настройки'),
+                //   //leading: const Icon(Icons.settings),
+                //   leading: SvgPicture.asset(
+                //       'lib/core/assets/drawer_icons/theme_settings.svg',
+                //       width: 21),
+                //   onTap: () {
+                //     GoRouter.of(context).goNamed(RouteNames.settingsScreen);
+                //   },
+                // ),
                 ListTile(
                   title: const Text('О компании'),
                   //leading: const Icon(Icons.work_outline_rounded),

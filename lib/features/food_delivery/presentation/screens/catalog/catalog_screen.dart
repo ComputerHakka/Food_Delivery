@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery_app/config/theme/app_themes.dart';
 import 'package:food_delivery_app/core/constants/constants.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/category.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/ingredient.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/label.dart';
 import 'package:food_delivery_app/features/food_delivery/domain/entities/menu.dart';
+import 'package:food_delivery_app/features/food_delivery/presentation/bloc/auth/auth_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/cart/cart_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/bloc/favorite/favorite_bloc.dart';
 import 'package:food_delivery_app/features/food_delivery/presentation/screens/catalog/product_details_screen.dart';
@@ -79,7 +81,13 @@ class _CatalogScreenState extends State<CatalogScreen> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 5),
                                 child: Text(
-                                    CategoryEntity.categoriesList[index].name),
+                                  CategoryEntity.categoriesList[index].name,
+                                  style: TextStyle(
+                                    fontWeight: index == _selectedIndex
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -124,11 +132,13 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         ],
                       ),
                       IconButton(
-                          onPressed: () {
-                            GoRouter.of(context)
-                                .goNamed(RouteNames.filterScreen);
-                          },
-                          icon: const Icon(Icons.filter_alt))
+                        onPressed: () {
+                          GoRouter.of(context).goNamed(RouteNames.filterScreen);
+                        },
+                        icon: SvgPicture.asset(
+                          'lib/core/assets/images/filters.svg',
+                        ),
+                      ),
                     ],
                   ),
                 )
@@ -282,36 +292,43 @@ class MenuCell extends StatelessWidget {
                   Positioned(
                     right: 0,
                     bottom: 0,
-                    child: BlocBuilder<FavoriteBloc, FavoriteState>(
+                    child: BlocBuilder<AuthBloc, AuthState>(
                       builder: (context, state) {
-                        if (state is FavoriteLoadedState) {
-                          if (state.favoriteMenus
-                                  .any((element) => element.id == product.id) ==
-                              true) {
-                            return IconButton(
-                              onPressed: () {
-                                context
-                                    .read<FavoriteBloc>()
-                                    .add(RemoveFavoriteEvent(menu: product));
-                              },
-                              icon: const Icon(
-                                Icons.favorite,
-                                color: Colors.red,
-                              ),
-                            );
-                          }
+                        if (state is AuthorizedState) {
+                          return BlocBuilder<FavoriteBloc, FavoriteState>(
+                            builder: (context, state) {
+                              if (state is FavoriteLoadedState) {
+                                if (state.favoriteMenus.any((element) =>
+                                        element.id == product.id) ==
+                                    true) {
+                                  return IconButton(
+                                    onPressed: () {
+                                      context.read<FavoriteBloc>().add(
+                                          RemoveFavoriteEvent(menu: product));
+                                    },
+                                    icon: const Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                    ),
+                                  );
+                                }
+                              }
+                              return IconButton(
+                                onPressed: () {
+                                  context
+                                      .read<FavoriteBloc>()
+                                      .add(AddFavoriteEvent(menu: product));
+                                },
+                                icon: const Icon(
+                                  Icons.favorite_border_outlined,
+                                  color: Colors.white,
+                                ),
+                              );
+                            },
+                          );
+                        } else {
+                          return const SizedBox.shrink();
                         }
-                        return IconButton(
-                          onPressed: () {
-                            context
-                                .read<FavoriteBloc>()
-                                .add(AddFavoriteEvent(menu: product));
-                          },
-                          icon: const Icon(
-                            Icons.favorite_border_outlined,
-                            color: Colors.white,
-                          ),
-                        );
                       },
                     ),
                   ),

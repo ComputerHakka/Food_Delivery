@@ -6,3 +6,13 @@ sealed class FilterEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FilterChangedEvent extends FilterEvent {
+  final String filter;
+
+  const FilterChangedEvent({required this.filter});
+}
+
+class FilterClearEvent extends FilterEvent {
+  const FilterClearEvent();
+}

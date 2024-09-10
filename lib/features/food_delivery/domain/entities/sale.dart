@@ -28,7 +28,7 @@ class SaleEntity {
       description:
           'Двойное удовольствие без лишних затрат! Закажи два бургера по цене одного и наслаждайся удвоенным вкусом.\n\nИдеально для тех, кто хочет разделить обед с другом или просто не может остановиться на одном.\n\nАкция распространяется на все виды бургеров — выбери свои любимые и сэкономь!',
       salePositions: [4, 5],
-      imagePath: 'lib/core/assets/sales_images/sale1.webp',
+      imagePath: 'lib/core/assets/sales_images/two_burgers.webp',
     ),
     SaleEntity(
       id: 3,
@@ -60,7 +60,7 @@ class SaleEntity {
       description:
           'Идеальный обед для настоящих гурманов! Закажи обеденное меню и получи напиток в подарок.\n\nНасыщенный вкус и идеальное сочетание блюд не оставят тебя равнодушным. Эта акция создана для тех, кто хочет вкусно поесть и насладиться любимыми напитками.\n\nОформляй заказ и наслаждайся!',
       salePositions: [14, 15],
-      imagePath: 'lib/core/assets/sales_images/sale1.webp',
+      imagePath: 'lib/core/assets/sales_images/super_lunch.webp',
     ),
     SaleEntity(
       id: 7,
@@ -68,7 +68,7 @@ class SaleEntity {
       description:
           'Двойное удовольствие от пиццы! Закажи сразу две пиццы и получи скидку 10% на обе.\n\nПрекрасный повод насладиться любимыми блюдами вместе с друзьями или семьей. Сочетай разные вкусы и удиви своих близких.\n\nНе упусти шанс сэкономить на вкуснейшей пицце!',
       salePositions: [16, 17, 18],
-      imagePath: 'lib/core/assets/sales_images/sale1.webp',
+      imagePath: 'lib/core/assets/sales_images/sale2.png',
     ),
   ];
 }

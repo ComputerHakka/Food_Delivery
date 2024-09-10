@@ -39,7 +39,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [1, 2, 3],
         images: ['lib/core/assets/food_images/carbonara.jpg'],
-        labels: [1],
+        labels: [],
         menuPositions: [1, 2]),
     MenuEntity(
         id: 2,
@@ -52,7 +52,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [4, 5, 6, 7],
         images: ['lib/core/assets/food_images/cezar.jpg'],
-        labels: [2],
+        labels: [],
         menuPositions: [3]),
     MenuEntity(
         id: 3,
@@ -65,7 +65,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [7, 8, 9],
         images: ['lib/core/assets/food_images/margo.jpg'],
-        labels: [3],
+        labels: [11],
         menuPositions: [4, 5]),
     MenuEntity(
         id: 4,
@@ -78,7 +78,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [10, 11, 12],
         images: ['lib/core/assets/food_images/sandwich.jpg'],
-        labels: [1],
+        labels: [12, 1],
         menuPositions: [6]),
     MenuEntity(
         id: 5,
@@ -91,7 +91,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [13, 14, 15],
         images: ['lib/core/assets/food_images/vigatables.jpg'],
-        labels: [4],
+        labels: [7],
         menuPositions: [7, 8]),
     MenuEntity(
         id: 6,
@@ -104,7 +104,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [16, 17, 18],
         images: ['lib/core/assets/food_images/torro_wrap_beef.jpg'],
-        labels: [5],
+        labels: [8],
         menuPositions: [9]),
     MenuEntity(
         id: 7,
@@ -117,7 +117,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [19, 20, 21],
         images: ['lib/core/assets/food_images/mango_smoozee.jpg'],
-        labels: [6],
+        labels: [2, 14],
         menuPositions: [10]),
     MenuEntity(
         id: 8,
@@ -130,7 +130,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [4, 5, 6, 7],
         images: ['lib/core/assets/food_images/bbq_pig.jpg'],
-        labels: [7],
+        labels: [9],
         menuPositions: [11, 12]),
     MenuEntity(
         id: 9,
@@ -143,7 +143,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [19, 20, 21],
         images: ['lib/core/assets/food_images/choco_cake.jpg'],
-        labels: [8],
+        labels: [3],
         menuPositions: [13]),
     MenuEntity(
         id: 10,
@@ -156,7 +156,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [10, 11, 12],
         images: ['lib/core/assets/food_images/avacado_tost.jpg'],
-        labels: [9],
+        labels: [13, 14],
         menuPositions: [14]),
     MenuEntity(
         id: 11,
@@ -169,7 +169,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [1, 2, 3],
         images: ['lib/core/assets/food_images/losos_grill.jpg'],
-        labels: [10],
+        labels: [2],
         menuPositions: [15]),
     MenuEntity(
         id: 12,
@@ -182,7 +182,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [1, 2, 3],
         images: ['lib/core/assets/food_images/grecheskij_scaled.jpg'],
-        labels: [11],
+        labels: [13, 14],
         menuPositions: [16]),
     MenuEntity(
         id: 13,
@@ -195,7 +195,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [1, 2, 3],
         images: ['lib/core/assets/food_images/pepperoni.jpg'],
-        labels: [12],
+        labels: [11],
         menuPositions: [17, 18]),
     MenuEntity(
         id: 14,
@@ -208,7 +208,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [1, 2, 3],
         images: ['lib/core/assets/food_images/chiken_wings.jpg'],
-        labels: [13],
+        labels: [8],
         menuPositions: [19]),
     MenuEntity(
         id: 15,
@@ -221,7 +221,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [10, 11, 12],
         images: ['lib/core/assets/food_images/tofu.jpg'],
-        labels: [14],
+        labels: [1],
         menuPositions: [20, 21]),
     MenuEntity(
         id: 16,
@@ -234,7 +234,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [1, 2, 3],
         images: ['lib/core/assets/food_images/fish_tortille.jpg'],
-        labels: [1, 4],
+        labels: [],
         menuPositions: [22]),
     MenuEntity(
         id: 17,
@@ -247,7 +247,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [10, 11, 12],
         images: ['lib/core/assets/food_images/strawberry_smoozee.jpg'],
-        labels: [2, 11],
+        labels: [14],
         menuPositions: [23]),
     MenuEntity(
         id: 18,
@@ -260,7 +260,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [10, 11, 12, 5, 6, 7],
         images: ['lib/core/assets/food_images/pig_on_bone.jpg'],
-        labels: [5],
+        labels: [],
         menuPositions: [24, 25]),
     MenuEntity(
         id: 19,
@@ -273,7 +273,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [10, 11, 12],
         images: ['lib/core/assets/food_images/cheezecake.jpg'],
-        labels: [9],
+        labels: [],
         menuPositions: [26]),
     MenuEntity(
         id: 20,
@@ -286,7 +286,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [10, 11, 12],
         images: ['lib/core/assets/food_images/sea_pasta.jpg'],
-        labels: [2, 6],
+        labels: [1],
         menuPositions: [27]),
     MenuEntity(
         id: 21,
@@ -299,7 +299,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [10, 11, 12],
         images: ['lib/core/assets/food_images/panini.jpg'],
-        labels: [4, 8],
+        labels: [10],
         menuPositions: [28]),
     MenuEntity(
         id: 22,
@@ -312,7 +312,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [10, 11, 12, 20, 19, 3],
         images: ['lib/core/assets/food_images/thai_curry.jpg'],
-        labels: [4],
+        labels: [],
         menuPositions: [29]),
     MenuEntity(
         id: 23,
@@ -325,7 +325,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [10, 11, 12],
         images: ['lib/core/assets/food_images/blins_with_berries.jpg'],
-        labels: [13],
+        labels: [],
         menuPositions: [30]),
     MenuEntity(
         id: 24,
@@ -338,7 +338,7 @@ class MenuEntity {
         isVegan: false,
         ingredients: [10, 11, 12, 5, 6, 20],
         images: ['lib/core/assets/food_images/la_soupe_a_loignon.jpg'],
-        labels: [5],
+        labels: [7],
         menuPositions: [31]),
     MenuEntity(
         id: 25,
@@ -351,7 +351,7 @@ class MenuEntity {
         isVegan: true,
         ingredients: [15, 11, 12, 14, 2, 4],
         images: ['lib/core/assets/food_images/ratatui.jpg'],
-        labels: [1, 2],
+        labels: [],
         menuPositions: [32]),
   ];
 }

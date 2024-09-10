@@ -161,7 +161,36 @@ class CartScreen extends StatelessWidget {
                     ],
                   ),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text(
+                              'На данный момент вы не можете оформить заказ, ждите следующих обновлений',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            actions: [
+                              Center(
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text(
+                                      'ОК',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
                     child: const Text('ОФОРМИТЬ'),
                   ),
                 ),
@@ -177,10 +206,11 @@ class CartScreen extends StatelessWidget {
 
 const TextStyle basicStyle = TextStyle(
   color: textFieldTextColor,
+  fontSize: 16,
 );
 
 const TextStyle totalStyle = TextStyle(
-  fontSize: 15,
+  fontSize: 18,
   fontWeight: FontWeight.bold,
 );
 

@@ -14,6 +14,13 @@ const Color onPrimaryContainers = Color(0xFFFAD2D3);
 
 final ThemeData appTheme = ThemeData(
   fontFamily: 'Montserrat',
+  pageTransitionsTheme: const PageTransitionsTheme(
+    builders: <TargetPlatform, PageTransitionsBuilder>{
+      TargetPlatform.android: ZoomPageTransitionsBuilder(
+        allowEnterRouteSnapshotting: false,
+      ),
+    },
+  ),
   appBarTheme: appBarTheme,
   colorScheme: ColorScheme.fromSeed(seedColor: accentColor),
   useMaterial3: true,
@@ -21,24 +28,30 @@ final ThemeData appTheme = ThemeData(
   drawerTheme: const DrawerThemeData(backgroundColor: Colors.white),
   scaffoldBackgroundColor: Colors.white,
   elevatedButtonTheme: elevatedButtonTheme,
-  outlinedButtonTheme: const OutlinedButtonThemeData(
-    style: ButtonStyle(
-      shape: WidgetStatePropertyAll(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10),
-          ),
-          side: BorderSide(color: containersColor, width: 0.5),
-        ),
-      ),
-      foregroundColor: WidgetStatePropertyAll(Colors.black),
-    ),
-  ),
+  textButtonTheme: const TextButtonThemeData(
+      style: ButtonStyle(
+    foregroundColor: WidgetStatePropertyAll(Colors.red),
+  )),
+  outlinedButtonTheme: outlinedButtonTheme,
   checkboxTheme: checkboxTheme,
   inputDecorationTheme: inputDecorationTheme,
   radioTheme: radioTheme,
   switchTheme: switchTheme,
   chipTheme: chipTheme,
+);
+
+const OutlinedButtonThemeData outlinedButtonTheme = OutlinedButtonThemeData(
+  style: ButtonStyle(
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+        side: BorderSide(color: containersColor, width: 0.5),
+      ),
+    ),
+    foregroundColor: WidgetStatePropertyAll(Colors.black),
+  ),
 );
 
 final RadioThemeData radioTheme = RadioThemeData(
