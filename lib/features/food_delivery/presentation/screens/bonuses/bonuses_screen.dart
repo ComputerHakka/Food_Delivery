@@ -18,7 +18,7 @@ class BonusesScreen extends StatelessWidget {
         child: Column(
           children: [
             _BonusBannerWidget(),
-            _AuthHintWidget(),
+            _UnderBannerSectionWidget(),
             _HowItWorksWidget(),
           ],
         ),
@@ -91,8 +91,8 @@ class _BonusBannerWidget extends StatelessWidget {
   }
 }
 
-class _AuthHintWidget extends StatelessWidget {
-  const _AuthHintWidget({
+class _UnderBannerSectionWidget extends StatelessWidget {
+  const _UnderBannerSectionWidget({
     super.key,
   });
 
@@ -101,85 +101,105 @@ class _AuthHintWidget extends StatelessWidget {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         if (state is AuthorizedState) {
-          return Column(
-            children: [
-              Ink(
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(10),
-                  onTap: () {
-                    GoRouter.of(context)
-                        .goNamed(RouteNames.bonusesHistoryScreen);
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'История бонусов',
-                          style: TextStyle(fontSize: 17),
-                        ),
-                        Icon(Icons.chevron_right_rounded)
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const Divider(),
-              Ink(
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(10),
-                  onTap: () {},
-                  child: const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Пригласить друга',
-                          style: TextStyle(fontSize: 17),
-                        ),
-                        Icon(Icons.chevron_right_rounded)
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          );
+          return const _BonusesSectionsWidget();
         }
-        return Column(
-          children: [
-            AspectRatio(
-              aspectRatio: 3.5,
-              child: Ink(
-                padding: const EdgeInsets.symmetric(vertical: 7.5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(10),
-                  onTap: () {
-                    GoRouter.of(context)
-                        .pushNamed(RouteNames.authorizationScreen);
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 25,
-                      vertical: 15,
-                    ),
-                    child: Text(
-                      'Авторизируйтесь, чтобы увидеть количество ваших бонусных баллов и историю из начисления',
-                      style: TextStyle(fontSize: 17, height: 1.2),
-                    ),
+        return const _AuthHintWidget();
+      },
+    );
+  }
+}
+
+class _BonusesSectionsWidget extends StatelessWidget {
+  const _BonusesSectionsWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Ink(
+          child: InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: () {
+              GoRouter.of(context).goNamed(RouteNames.bonusesHistoryScreen);
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'История бонусов',
+                    style: TextStyle(fontSize: 17),
                   ),
+                  Icon(Icons.chevron_right_rounded)
+                ],
+              ),
+            ),
+          ),
+        ),
+        const Divider(),
+        Ink(
+          child: InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: () {},
+            child: const Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Пригласить друга',
+                    style: TextStyle(fontSize: 17),
+                  ),
+                  Icon(Icons.chevron_right_rounded)
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _AuthHintWidget extends StatelessWidget {
+  const _AuthHintWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AspectRatio(
+          aspectRatio: 3.5,
+          child: Ink(
+            padding: const EdgeInsets.symmetric(vertical: 7.5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(10),
+              onTap: () {
+                GoRouter.of(context).pushNamed(RouteNames.authorizationScreen);
+              },
+              child: const Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 25,
+                  vertical: 15,
+                ),
+                child: Text(
+                  'Авторизируйтесь, чтобы увидеть количество ваших бонусных баллов и историю из начисления',
+                  style: TextStyle(fontSize: 17, height: 1.2),
                 ),
               ),
             ),
-            const Divider(),
-          ],
-        );
-      },
+          ),
+        ),
+        const Divider(),
+      ],
     );
   }
 }
